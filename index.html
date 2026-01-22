@@ -15,41 +15,39 @@
         .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; border-radius: 5px; }
         .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
         .admin-box { border: 1px dashed var(--admin-color); padding: 15px; margin-top: 20px; color: var(--admin-color); border-radius: 8px; }
+        .hidden { display: none; }
         .social-link { display: block; padding: 15px; margin-bottom: 10px; border: 1px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: bold; border-radius: 5px; }
         .completed { background: var(--primary) !important; color: black !important; }
-        .hidden { display: none; }
         .tool-card { background: rgba(0,0,0,0.8); padding: 15px; border: 1px solid var(--primary); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; }
-        .lang-btn { position: fixed; top: 10px; right: 10px; z-index: 100; display: flex; gap: 5px; }
-        .s-btn { padding: 5px 10px; font-size: 12px; width: auto; margin: 0; }
     </style>
 </head>
 <body>
 
     <canvas id="matrix"></canvas>
 
-    <div class="lang-btn">
-        <button onclick="changeLang('en')" class="btn s-btn">EN</button>
-        <button onclick="changeLang('ur')" class="btn s-btn">اردو</button>
-    </div>
-
     <div id="screen-login" class="container">
-        <h1 id="main-title" style="font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 10px var(--primary);">GAMING HUB</h1>
+        <h1 style="font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 10px var(--primary);">GAMING HUB</h1>
         <div class="glass-card">
-            <p id="txt-sys" style="font-size: 11px;">[ SYSTEM ENCRYPTION ACTIVE ]</p>
             <input type="password" id="auth-key" placeholder="ENTER LICENSE KEY...">
-            <button class="btn" id="btn-login" onclick="handleLogin()">INITIALIZE ACCESS</button>
+            <button class="btn" onclick="handleLogin()">INITIALIZE ACCESS</button>
         </div>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <h2 id="txt-admin" style="color: var(--admin-color);">ADMIN TERMINAL</h2>
+        <h2 style="color: var(--admin-color);">ADMIN TERMINAL</h2>
         <div class="glass-card" style="border-color: var(--admin-color);">
+            
+            <div class="admin-box" style="border-color: #ff4444; color: #ff4444;">
+                <p>⚙️ CHANGE ADMIN PASSWORD</p>
+                <input type="text" id="new-admin-pass" placeholder="Enter New Password">
+                <button class="btn" style="border-color: #ff4444;" onclick="updateAdminPass()">UPDATE PASSWORD</button>
+            </div>
+
             <div class="admin-box">
                 <p>KEY MANAGEMENT</p>
                 <input type="number" id="key-hours" placeholder="Hours" value="24">
                 <button class="btn" style="border-color: var(--admin-color);" onclick="generateKey()">GENERATE KEY</button>
                 <div id="new-key-res" style="margin:10px 0; font-size:14px; color:white;">No Key Generated</div>
-                <button class="btn" style="border-color: #ff4444; color: #ff4444;" onclick="deleteExpiredKeys()">DELETE EXPIRED KEYS</button>
             </div>
 
             <div class="admin-box" style="border-color: #f39c12; color: #f39c12;">
@@ -67,18 +65,12 @@
                 <button class="btn" onclick="uploadTool()">SEND TO CLOUD</button>
             </div>
 
-            <div class="admin-box" style="border-color: var(--accent);">
-                <p>POST VIDEO TUTORIAL</p>
-                <input type="text" id="vid-title" placeholder="Video Title">
-                <input type="text" id="vid-url" placeholder="Video Link">
-                <button class="btn" style="border-color: var(--accent);" onclick="uploadVideoLink()">POST VIDEO</button>
-            </div>
             <button class="btn" onclick="location.reload()">LOGOUT</button>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h2 id="txt-verify">VERIFY IDENTITY</h2>
+        <h2>VERIFY IDENTITY</h2>
         <div class="glass-card">
             <a href="#" target="_blank" class="social-link" id="s1" onclick="markStep('s1')">FOLLOW TIKTOK</a>
             <a href="#" target="_blank" class="social-link" id="s2" onclick="markStep('s2')">SUBSCRIBE YOUTUBE</a>
@@ -89,20 +81,13 @@
     </div>
 
     <div id="screen-tools" class="container hidden">
-        <h2 id="txt-unlocked">DATABASE UNLOCKED</h2>
-        <div id="video-links-section" style="margin-top:20px;">
-            <h4 style="color: var(--accent); margin-bottom:10px;">VIDEO TUTORIALS</h4>
-            <div id="video-links-list"></div>
-        </div>
-        <div id="tools-section" style="margin-top: 20px;">
-            <h4 style="color: var(--primary); margin-bottom:10px;">AVAILABLE TOOLS</h4>
-            <div id="tools-list"></div>
-        </div>
+        <h2>DATABASE UNLOCKED</h2>
+        <div id="tools-list" style="margin-top:20px;"></div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, addDoc, onSnapshot, query, orderBy, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC9THzTxB73m4OpeNE2tkmafvpExIGWlvg",
@@ -115,7 +100,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- Matrix effect ---
+        // --- Matrix Rain ---
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -130,62 +115,19 @@
             });
         }, 35);
 
-        // --- Translation ---
-        window.changeLang = (lang) => {
-            const trans = {
-                en: { login: "INITIALIZE ACCESS", key: "ENTER LICENSE KEY...", admin: "ADMIN TERMINAL", tools: "DATABASE UNLOCKED", verify: "VERIFY IDENTITY" },
-                ur: { login: "رسائی شروع کریں", key: "لائسنس کی درج کریں...", admin: "ایڈمن پینل", tools: "ڈیٹا بیس کھل گیا", verify: "تصدیق کریں" }
-            };
-            document.getElementById('btn-login').innerText = trans[lang].login;
-            document.getElementById('auth-key').placeholder = trans[lang].key;
-            document.getElementById('txt-admin').innerText = trans[lang].admin;
-            document.getElementById('txt-unlocked').innerText = trans[lang].tools;
-            document.getElementById('txt-verify').innerText = trans[lang].verify;
-        };
-
-        // --- Admin Core ---
-        window.generateKey = async () => {
-            const h = document.getElementById('key-hours').value;
-            const k = "KING-" + Math.random().toString(36).substring(2,8).toUpperCase();
-            await setDoc(doc(db, "keys", k), { expiry: Date.now() + (h * 3600000) });
-            document.getElementById('new-key-res').innerText = "NEW KEY: " + k;
-        };
-
-        window.deleteExpiredKeys = async () => {
-            const snap = await getDocs(collection(db, "keys"));
-            const now = Date.now();
-            snap.forEach(async (k) => { if(k.data().expiry < now) await deleteDoc(doc(db, "keys", k.id)); });
-            alert("Cleanup Successful!");
-        };
-
-        window.updateSocialLinks = async () => {
-            const tk = document.getElementById('link-tiktok').value.trim();
-            const yt = document.getElementById('link-yt').value.trim();
-            const wa = document.getElementById('link-wa').value.trim();
-            if(tk.startsWith('http')) {
-                await setDoc(doc(db, "settings", "socials"), { tk, yt, wa });
-                alert("Links Locked & Saved!");
-            } else alert("Invalid URLs!");
-        };
-
-        window.uploadTool = async () => {
-            const name = document.getElementById('tool-name').value;
-            const url = document.getElementById('tool-url').value;
-            if(name && url) await addDoc(collection(db, "tools"), { name, url, time: Date.now() });
-            alert("Tool Added!");
-        };
-
-        window.uploadVideoLink = async () => {
-            const title = document.getElementById('vid-title').value;
-            const url = document.getElementById('vid-url').value;
-            if(title && url) await addDoc(collection(db, "videoLinks"), { title, url, time: Date.now() });
-            alert("Video Link Posted!");
-        };
-
-        // --- Logic Flow ---
+        // --- Admin Password Logic ---
         window.handleLogin = async () => {
             const k = document.getElementById('auth-key').value.trim();
-            if(k === "killer786") return show('screen-admin');
+            
+            // Database se password check karna
+            const passSnap = await getDoc(doc(db, "settings", "adminConfig"));
+            let correctPass = "killer786"; // Default password
+            if(passSnap.exists()) {
+                correctPass = passSnap.data().password;
+            }
+
+            if(k === correctPass) return show('screen-admin');
+            
             const snap = await getDoc(doc(db, "keys", k));
             if(snap.exists() && Date.now() < snap.data().expiry) {
                 const s = await getDoc(doc(db, "settings", "socials"));
@@ -196,6 +138,36 @@
                 }
                 show('screen-verify');
             } else alert("Invalid Key!");
+        };
+
+        window.updateAdminPass = async () => {
+            const newPass = document.getElementById('new-admin-pass').value.trim();
+            if(newPass.length < 4) return alert("Password too short!");
+            await setDoc(doc(db, "settings", "adminConfig"), { password: newPass });
+            alert("Admin Password Updated! Use this next time.");
+        };
+
+        // --- Other Functions ---
+        window.generateKey = async () => {
+            const h = document.getElementById('key-hours').value;
+            const k = "KING-" + Math.random().toString(36).substring(2,8).toUpperCase();
+            await setDoc(doc(db, "keys", k), { expiry: Date.now() + (h * 3600000) });
+            document.getElementById('new-key-res').innerText = "KEY: " + k;
+        };
+
+        window.updateSocialLinks = async () => {
+            const tk = document.getElementById('link-tiktok').value.trim();
+            const yt = document.getElementById('link-yt').value.trim();
+            const wa = document.getElementById('link-wa').value.trim();
+            await setDoc(doc(db, "settings", "socials"), { tk, yt, wa });
+            alert("Links Locked!");
+        };
+
+        window.uploadTool = async () => {
+            const name = document.getElementById('tool-name').value;
+            const url = document.getElementById('tool-url').value;
+            if(name && url) await addDoc(collection(db, "tools"), { name, url, time: Date.now() });
+            alert("Tool Added!");
         };
 
         let steps = new Set();
@@ -218,11 +190,7 @@
         function loadData() {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (s) => {
                 const l = document.getElementById('tools-list'); l.innerHTML = "";
-                s.forEach(d => l.innerHTML += `<div class="tool-card"><span>${d.data().name}</span><a href="${d.data().url}" target="_blank" style="color:var(--primary)">DOWNLOAD</a></div>`);
-            });
-            onSnapshot(query(collection(db, "videoLinks"), orderBy("time", "desc")), (s) => {
-                const l = document.getElementById('video-links-list'); l.innerHTML = "";
-                s.forEach(d => l.innerHTML += `<div class="tool-card" style="border-color:var(--accent)"><span>${d.data().title}</span><a href="${d.data().url}" target="_blank" style="color:var(--accent)">WATCH</a></div>`);
+                s.forEach(d => l.innerHTML += `<div class="tool-card"><span>${d.data().name}</span><a href="${d.data().url}" target="_blank" style="color:lime">GET</a></div>`);
             });
         }
 
