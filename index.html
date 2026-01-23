@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | FIXED DELETE</title>
+    <title>GAMING HUB | ALL FEATURES FIXED</title>
     <style>
         :root { --primary: #00d2ff; --bg: #0f172a; --glass: rgba(30, 41, 59, 0.7); --danger: #ef4444; --video: #ff0050; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: radial-gradient(circle at top right, #1e293b, #0f172a); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        body { background: radial-gradient(circle at top right, #1e293b, #0f172a); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 420px; padding: 20px; text-align: center; }
-        .glass-card { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 24px; backdrop-filter: blur(20px); }
-        input { width: 100%; padding: 12px; margin: 5px 0; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 12px; outline: none; }
-        .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: none; background: var(--primary); color: #000; cursor: pointer; font-weight: 700; border-radius: 12px; }
+        .glass-card { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 24px; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .pass-container { position: relative; width: 100%; margin: 8px 0; }
+        input { width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 12px; outline: none; width: 100%; }
+        .eye-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; }
+        .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: none; background: var(--primary); color: #000; cursor: pointer; font-weight: 700; border-radius: 12px; transition: 0.3s; text-decoration: none; }
+        .contact-btn { background: #25d366; color: white; margin-top: 15px; font-size: 0.85rem; padding: 10px 20px; border-radius: 10px; font-weight: bold; }
         .tool-card { background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px; border-radius: 20px; display: flex; align-items: center; gap: 12px; text-align: left; }
-        .tool-img { width: 60px; height: 60px; border-radius: 15px; object-fit: cover; }
+        .tool-img { width: 60px; height: 60px; border-radius: 15px; object-fit: cover; background: #334155; }
+        .action-btns { display: flex; gap: 8px; margin-top: 5px; }
+        .dl-link { color: #000; background: var(--primary); text-decoration: none; font-size: 0.7rem; padding: 7px 10px; border-radius: 6px; font-weight: bold; }
+        .vid-link { color: #fff; border: 1px solid var(--video); text-decoration: none; font-size: 0.7rem; padding: 6px 9px; border-radius: 6px; }
         .hidden { display: none !important; }
         #admin-btn { position: fixed; bottom: 20px; right: 20px; opacity: 0.3; cursor: pointer; font-size: 1.5rem; }
         .admin-item { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 12px; margin-bottom: 10px; text-align: left; border-left: 4px solid var(--primary); }
@@ -27,25 +33,53 @@
         <h1>Gaming Hub</h1>
         <div class="glass-card">
             <input type="email" id="user-email" placeholder="Email">
-            <input type="password" id="user-pass" placeholder="Password">
-            <button class="btn" onclick="handleAuth()">Login</button>
+            <div class="pass-container">
+                <input type="password" id="user-pass" placeholder="Password">
+                <span class="eye-icon" onclick="togglePass()">👁️</span>
+            </div>
+            <button class="btn" onclick="handleAuth()">Access Hub</button>
+            <a href="#" id="login-contact" class="btn contact-btn" target="_blank">WhatsApp Support</a>
+        </div>
+    </div>
+
+    <div id="screen-verify" class="container hidden">
+        <h1>Clearance</h1>
+        <div class="glass-card">
+            <a href="#" id="s1_link" target="_blank" class="btn" onclick="markStep('s1')">Step 1: TikTok</a>
+            <a href="#" id="s2_link" target="_blank" class="btn" onclick="markStep('s2')">Step 2: YouTube</a>
+            <a href="#" id="s3_link" target="_blank" class="btn" onclick="markStep('s3')">Step 3: WhatsApp</a>
+            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">Start Decryption</button>
+            <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">Unlocking... <span id="sec">15</span>s</p>
         </div>
     </div>
 
     <div id="screen-tools" class="container hidden">
         <h1>Tools Hub</h1>
         <div id="tools-list" style="margin-top:20px;"></div>
-        <button class="btn" style="background:none; border:1px solid var(--danger); color:var(--danger);" onclick="logout()">Logout</button>
+        <a href="#" id="tools-contact" class="btn contact-btn" style="width: 100%;" target="_blank">Contact Admin</a>
+        <button class="btn" style="background:none; border:1px solid var(--danger); color:var(--danger); margin-top:20px;" onclick="logout()">Logout</button>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <h1>Admin Control</h1>
-        <div class="glass-card" style="text-align: left;">
-            <input type="text" id="t_name" placeholder="Tool Name">
+        <h1>Admin Settings</h1>
+        <div class="glass-card" style="text-align: left; max-height: 80vh; overflow-y: auto;">
+            <p style="color:var(--primary);">Add Tool:</p>
+            <input type="text" id="t_name" placeholder="Name">
             <input type="text" id="t_url" placeholder="Download Link">
             <input type="text" id="t_pic" placeholder="Icon Link">
+            <input type="text" id="t_vid" placeholder="Video Link">
             <button class="btn" onclick="uploadTool()">Upload</button>
             <hr style="margin:20px 0; opacity:0.1;">
+            
+            <p style="color:var(--primary);">Social Settings:</p>
+            <input type="text" id="set_tk" placeholder="TikTok URL">
+            <input type="text" id="set_yt" placeholder="YouTube URL">
+            <input type="text" id="set_wa" placeholder="WhatsApp Group">
+            <input type="text" id="set_phone" placeholder="Admin No (91...)">
+            <button class="btn" style="background:#fff;" onclick="updateSettings()">Save All</button>
+            <hr style="margin:20px 0; opacity:0.1;">
+            
+            <p style="color:var(--primary);">Manage List:</p>
             <div id="admin-tools-list"></div>
             <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">Back</button>
         </div>
@@ -54,7 +88,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC9THzTxB73m4OpeNE2tkmafvpExIGWlvg",
@@ -69,7 +103,38 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // --- AUTH ---
+        window.togglePass = () => {
+            const p = document.getElementById('user-pass');
+            p.type = p.type === "password" ? "text" : "password";
+        };
+
+        async function loadSettings() {
+            const snap = await getDoc(doc(db, "config", "main"));
+            if(snap.exists()){
+                const d = snap.data();
+                document.getElementById('s1_link').href = d.tk;
+                document.getElementById('s2_link').href = d.yt;
+                document.getElementById('s3_link').href = d.wa;
+                const support = `https://wa.me/${d.phone}`;
+                document.getElementById('login-contact').href = support;
+                document.getElementById('tools-contact').href = support;
+                document.getElementById('set_tk').value = d.tk;
+                document.getElementById('set_yt').value = d.yt;
+                document.getElementById('set_wa').value = d.wa;
+                document.getElementById('set_phone').value = d.phone;
+            }
+        }
+
+        window.updateSettings = async () => {
+            await setDoc(doc(db, "config", "main"), {
+                tk: document.getElementById('set_tk').value,
+                yt: document.getElementById('set_yt').value,
+                wa: document.getElementById('set_wa').value,
+                phone: document.getElementById('set_phone').value
+            });
+            alert("Updated!"); loadSettings();
+        };
+
         window.handleAuth = async () => {
             const e = document.getElementById('user-email').value;
             const p = document.getElementById('user-pass').value;
@@ -77,44 +142,40 @@
         };
 
         onAuthStateChanged(auth, (user) => {
-            if(user) { document.getElementById('admin-btn').classList.remove('hidden'); show('screen-tools'); loadTools(); }
+            if(user) { document.getElementById('admin-btn').classList.remove('hidden'); show('screen-verify'); loadSettings(); }
         });
 
-        // --- FIXED DELETE ---
+        // --- FIXED DELETE (STRICT) ---
         window.deleteTool = async (id) => {
-            if(confirm("Confirm Delete?")) {
+            if(confirm("Bhai, Delete kar doon?")) {
                 try {
-                    // Seedha Firestore se delete
-                    const docRef = doc(db, "tools", id);
-                    await deleteDoc(docRef);
-                    alert("Deleted successfully!");
-                    // List khud hi update ho jayegi onSnapshot ki wajah se
-                } catch (error) {
-                    console.error("Error deleting:", error);
-                    alert("Error: " + error.message);
-                }
+                    await deleteDoc(doc(db, "tools", id));
+                    alert("Deleted!");
+                    // No need to refresh, onSnapshot handles it!
+                } catch(e) { alert("Error: " + e.message); }
             }
         };
 
-        // --- LOAD TOOLS ---
+        window.copyLink = (t) => { navigator.clipboard.writeText(t).then(()=>alert("Copied!")); };
+
         function loadTools() {
-            const q = query(collection(db, "tools"), orderBy("time", "desc"));
-            onSnapshot(q, (snap) => {
+            onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
                 const list = document.getElementById('tools-list');
                 const adminList = document.getElementById('admin-tools-list');
                 list.innerHTML = ""; adminList.innerHTML = "";
-                
                 snap.forEach(d => {
                     const data = d.data();
-                    list.innerHTML += `<div class="tool-card"><img src="${data.pic}" class="tool-img"><div><b>${data.name}</b><br><a href="${data.url}" class="btn" style="padding:5px; font-size:10px;">GET</a></div></div>`;
-                    
+                    list.innerHTML += `<div class="tool-card">
+                        <img src="${data.pic}" class="tool-img">
+                        <div><b>${data.name}</b><div class="action-btns"><a href="${data.url}" class="dl-link" target="_blank">DOWNLOAD</a>${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">VIDEO</a>`:''}</div></div>
+                    </div>`;
+                    const share = `${window.location.origin}${window.location.pathname}?tool=${d.id}`;
                     adminList.innerHTML += `<div class="admin-item">
-                        <span>${data.name}</span>
-                        <button onclick="deleteTool('${d.id}')" style="color:red; float:right; background:none; border:none; cursor:pointer; font-weight:bold;">DELETE</button>
+                        <b>${data.name}</b><br>
+                        <button onclick="copyLink('${share}')" style="font-size:10px;">COPY LINK</button>
+                        <button onclick="deleteTool('${d.id}')" style="color:red; float:right; border:none; background:none; cursor:pointer; font-weight:bold;">DELETE</button>
                     </div>`;
                 });
-            }, (error) => {
-                console.log("Snapshot error:", error);
             });
         }
 
@@ -122,16 +183,19 @@
             const name = document.getElementById('t_name').value;
             const url = document.getElementById('t_url').value;
             const pic = document.getElementById('t_pic').value;
+            const vid = document.getElementById('t_vid').value;
             if(name && url) {
-                await addDoc(collection(db, "tools"), { name, url, pic, time: Date.now() });
-                alert("Uploaded!");
+                await addDoc(collection(db, "tools"), { name, url, pic, vid, time: Date.now() });
+                alert("Success!");
+                document.getElementById('t_name').value=""; document.getElementById('t_url').value="";
             }
         };
 
-        window.askAdminPass = () => { if(prompt("PIN:") === "killer786") show('screen-admin'); };
+        window.markStep = (id) => { document.getElementById(id+'_link').style.background="var(--primary)"; window.steps = (window.steps || 0) + 1; if(window.steps >=3) document.getElementById('unlock-btn').classList.remove('hidden'); };
+        window.startTimer = () => { document.getElementById('timer-box').classList.remove('hidden'); let t=15; let itv = setInterval(()=>{ if(t>0){ t--; document.getElementById('sec').innerText=t; }else{ clearInterval(itv); show('screen-tools'); loadTools(); } },1000); };
+        window.askAdminPass = () => { if(prompt("PIN:") === "killer786") { show('screen-admin'); loadTools(); loadSettings(); } };
         window.logout = () => signOut(auth).then(() => location.reload());
         function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
     </script>
 </body>
 </html>
-
