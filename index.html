@@ -3,98 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | MASTER VERSION</title>
+    <title>GAMING HUB | FINAL MASTER V2</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00f2ff; --secondary: #7000ff; --bg: #050b18; --glass: rgba(15, 23, 42, 0.9); --danger: #ff4757; }
+        :root { --primary: #00f2ff; --secondary: #7000ff; --bg: #050b18; --glass: rgba(15, 23, 42, 0.9); --danger: #ff4757; --success: #2ed573; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: radial-gradient(circle at center, #1a1a2e 0%, #050b18 100%); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
         
-        /* --- New Top Left Profile Menu --- */
+        /* --- Top Menu --- */
         .user-menu-container { position: fixed; top: 15px; left: 15px; z-index: 2000; }
-        .profile-trigger { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); cursor: pointer; overflow: hidden; box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); transition: 0.3s; background: var(--glass); }
-        .profile-trigger:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
+        .profile-trigger { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); cursor: pointer; overflow: hidden; box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); background: var(--glass); }
         .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
-        
         .dropdown-menu { position: absolute; top: 60px; left: 0; background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 20px; width: 220px; display: none; backdrop-filter: blur(20px); padding: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); animation: slideDown 0.3s ease; }
         .dropdown-menu.active { display: block; }
-        
         .dropdown-header { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; text-align: center; }
-        .dropdown-header img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 8px; }
-        
-        .dropdown-menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; color: white; text-decoration: none; text-align: left; background: none; border: none; cursor: pointer; font-size: 14px; border-radius: 10px; transition: 0.2s; }
+        .dropdown-header img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 5px; }
+        .dropdown-menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; color: white; background: none; border: none; cursor: pointer; font-size: 14px; border-radius: 10px; transition: 0.2s; text-align: left;}
         .dropdown-menu button:hover { background: rgba(0, 242, 255, 0.1); color: var(--primary); }
-        
-        .logout-section { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; padding-top: 8px; }
-        .logout-btn-nav { color: var(--danger) !important; font-weight: bold; }
-        .logout-btn-nav:hover { background: rgba(255, 71, 87, 0.1) !important; }
 
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- Original Styles Kept --- */
+        /* --- UI Components --- */
         .container { width: 100%; max-width: 450px; padding: 20px; text-align: center; }
-        .glass-card { background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); padding: 30px; border-radius: 30px; backdrop-filter: blur(25px); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
-        input { width: 100%; padding: 15px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 15px; outline: none; margin: 10px 0; }
-        .btn { display: block; width: 100%; padding: 15px; margin-top: 15px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; transition: 0.3s; text-decoration: none; text-transform: uppercase; text-align: center;}
-        .social-auth { display: flex; gap: 10px; margin-top: 20px; }
-        .social-btn { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; background: rgba(255,255,255,0.1); color: white; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: bold; }
-        .tool-card { background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; border-radius: 20px; display: flex; align-items: center; gap: 15px; text-align: left; }
-        .tool-img { width: 65px; height: 65px; border-radius: 15px; object-fit: cover; border: 2px solid var(--primary); }
-        .action-btns { display: flex; gap: 8px; margin-top: 8px; }
-        .dl-link { background: var(--primary); color: #000; padding: 5px 12px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 0.8rem; }
-        .vid-link { border: 1px solid #ff0050; color: #fff; padding: 4px 11px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; }
+        .glass-card { background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); padding: 25px; border-radius: 30px; backdrop-filter: blur(25px); margin-bottom: 20px; }
+        input { width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; outline: none; margin: 8px 0; }
+        .btn { display: block; width: 100%; padding: 15px; margin-top: 10px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; transition: 0.3s; text-decoration: none; text-transform: uppercase; text-align: center; }
+        
+        .tool-card { background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 12px; border-radius: 18px; display: flex; align-items: center; gap: 15px; text-align: left; }
+        .tool-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; border: 2px solid var(--primary); }
+        .action-btns { display: flex; gap: 8px; margin-top: 5px; }
+        .dl-link { background: var(--primary); color: #000; padding: 5px 12px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 0.75rem; }
+        .vid-link { border: 1px solid #ff0050; color: #fff; padding: 4px 11px; border-radius: 6px; text-decoration: none; font-size: 0.75rem; }
+        
+        /* Admin User/Tool List Item */
+        .admin-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 8px; font-size: 0.8rem; }
+        .del-btn { background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; }
+
         .hidden { display: none !important; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="user-menu" class="user-menu-container hidden">
         <div class="profile-trigger" onclick="toggleDropdown()">
-            <img id="top-profile-pic" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+            <img id="top-profile-pic" src="">
         </div>
         <div class="dropdown-menu" id="profile-dropdown">
             <div class="dropdown-header">
                 <img id="header-pic" src="">
-                <div id="top-user-name" style="font-weight: bold; color: var(--primary);">User</div>
-                <div id="top-user-email" style="font-size: 10px; opacity: 0.6;">email@example.com</div>
+                <div id="top-user-name" style="font-weight: bold; color: var(--primary); font-size: 14px;">User</div>
             </div>
-            <button onclick="tab('tools')">📂 ٹولز لسٹ</button>
-            <button onclick="tab('profile')">👤 میری پروفائل</button>
-            <button onclick="askAdminPass()">⚙️ ایڈمن پینل</button>
-            <div class="logout-section">
-                <button class="logout-btn-nav" onclick="logout()">🚪 لاگ آؤٹ</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="screen-blocked" class="container hidden">
-        <div class="glass-card">
-            <h1 style="color:var(--danger);">BANNED</h1>
-            <p>آپ کا اکاؤنٹ بلاک کر دیا گیا ہے۔</p>
-            <button class="btn" onclick="logout()">Logout</button>
+            <button onclick="tab('tools')">📂 Tools List</button>
+            <button onclick="tab('profile')">👤 Profile Settings</button>
+            <button onclick="askAdminPass()">⚙️ Admin Dashboard</button>
+            <button onclick="logout()" style="color: var(--danger); border-top: 1px solid rgba(255,255,255,0.1); margin-top: 5px;">🚪 Logout</button>
         </div>
     </div>
 
     <div id="screen-login" class="container">
-        <h1 style="font-family:'Orbitron'; color:var(--primary); margin-bottom: 10px;">Gaming Hub</h1>
+        <h1 style="font-family:'Orbitron'; color:var(--primary); margin-bottom: 15px;">GAMING HUB</h1>
         <div class="glass-card">
-            <input type="email" id="user-email" placeholder="ای میل">
-            <input type="password" id="user-pass" placeholder="پاس ورڈ">
-            <button class="btn" onclick="handleAuth()">لاگ ان / سائن اپ</button>
-            <div class="social-auth">
-                <button class="social-btn" onclick="loginSocial('google')">Google</button>
-            </div>
+            <input type="email" id="user-email" placeholder="Email">
+            <input type="password" id="user-pass" placeholder="Password">
+            <button class="btn" onclick="handleAuth()">Login / Sign Up</button>
+            <button class="btn" style="background: white; color: black;" onclick="loginSocial()">Google Login</button>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h1>Verify Steps</h1>
+        <h2 style="color: gold; margin-bottom: 15px;">Verification</h2>
         <div class="glass-card">
-            <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep('s1')">Step 1: TikTok</a>
-            <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep('s2')">Step 2: YouTube</a>
-            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep('s3')">Step 3: WhatsApp</a>
-            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">Unlock Tools</button>
-            <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">Processing: <span id="sec">15</span>s</p>
+            <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep(1)">Step 1: TikTok</a>
+            <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep(2)">Step 2: YouTube</a>
+            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep(3)">Step 3: WhatsApp</a>
+            <button id="unlock-btn" class="btn hidden" style="background:var(--success); color: white;" onclick="startTimer()">Unlock Now</button>
+            <div id="timer-box" class="hidden" style="margin-top: 10px; color: gold;">Processing: <span id="sec">15</span>s</div>
         </div>
     </div>
 
@@ -105,31 +87,53 @@
         </div>
         <div id="tab-profile-view" class="hidden">
             <div class="glass-card">
-                <img id="profile-pic" src="" style="width:100px; height:100px; border-radius:50%; border:3px solid var(--primary); margin-bottom:15px; object-fit:cover;">
-                <h3 id="profile-name">...</h3>
-                <p id="profile-email-disp" style="opacity:0.6; margin-bottom:20px; font-size: 0.9rem;"></p>
-                <input type="text" id="edit-name" placeholder="نیا نام لکھیں">
-                <button class="btn" onclick="updateProfile()">Update Profile</button>
+                <img id="profile-pic" src="" style="width:90px; height:90px; border-radius:50%; border:2px solid var(--primary); margin-bottom:15px;">
+                <h3 id="profile-name-view">...</h3>
+                <p id="profile-email-view" style="opacity:0.5; font-size: 0.8rem; margin-bottom: 15px;"></p>
+                <input type="text" id="edit-name" placeholder="New Name">
+                <button class="btn" onclick="updateProfile()">Save Name</button>
             </div>
         </div>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <div class="glass-card" style="text-align: left; max-height: 90vh; overflow-y: auto;">
-            <h2 style="color:var(--primary);">Admin Dashboard</h2>
-            <div id="admin-users-list" style="margin: 15px 0;"></div>
+        <div class="glass-card" style="text-align: left; max-height: 85vh; overflow-y: auto;">
+            <h2 style="color:var(--primary); text-align: center;">ADMIN PANEL</h2>
+            
+            <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">Add Tool</p>
             <input type="text" id="t_name" placeholder="Tool Name">
             <input type="text" id="t_url" placeholder="Download Link">
-            <input type="text" id="t_pic" placeholder="Icon Link">
-            <button class="btn" onclick="uploadTool()">Upload Now</button>
+            <input type="text" id="t_pic" placeholder="Icon URL">
+            <input type="text" id="t_vid" placeholder="Video URL">
+            <button class="btn" onclick="uploadTool()">Upload</button>
+
+            <p style="margin-top: 20px; font-weight: bold; color: var(--danger);">Manage Tools (Delete)</p>
+            <div id="admin-tools-manage" style="margin-bottom: 20px;"></div>
+
+            <p style="font-weight: bold; color: var(--primary);">Update Verification Links</p>
+            <input type="text" id="set_tk" placeholder="TikTok Link">
+            <input type="text" id="set_yt" placeholder="YouTube Link">
+            <input type="text" id="set_wa" placeholder="WhatsApp Link">
+            <button class="btn" style="background: white; color: black;" onclick="updateSettings()">Save Links</button>
+
+            <p style="margin-top: 20px; font-weight: bold; color: var(--primary);">Manage Users</p>
+            <div id="admin-users-list"></div>
+            
             <button class="btn" style="background:#333; color:#fff;" onclick="location.reload()">Back</button>
+        </div>
+    </div>
+
+    <div id="screen-blocked" class="container hidden">
+        <div class="glass-card">
+            <h1 style="color:var(--danger);">BANNED</h1>
+            <button class="btn" onclick="logout()">Logout</button>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC9THzTxB73m4OpeNE2tkmafvpExIGWlvg",
@@ -144,17 +148,9 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // --- UI HELPERS ---
-        window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
-        
-        window.tab = (t) => {
-            document.getElementById('profile-dropdown').classList.remove('active');
-            document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools');
-            document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile');
-            document.getElementById('view-title').innerText = t.toUpperCase();
-        };
+        let stepsCount = 0;
 
-        // --- AUTH LOGIC ---
+        // --- Auth & Sync ---
         onAuthStateChanged(auth, async (user) => {
             if(user) {
                 const userRef = doc(db, "users", user.uid);
@@ -165,78 +161,126 @@
                 }
                 const userData = snap.data();
                 if(userData.isBlocked) { show('screen-blocked'); return; }
-                
-                // Update All UI elements
-                const pPic = userData.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
-                document.getElementById('top-profile-pic').src = pPic;
-                document.getElementById('header-pic').src = pPic;
-                document.getElementById('profile-pic').src = pPic;
-                document.getElementById('top-user-name').innerText = userData.name;
-                document.getElementById('profile-name').innerText = userData.name;
-                document.getElementById('top-user-email').innerText = userData.email;
-                document.getElementById('profile-email-disp').innerText = userData.email;
 
+                updateProfileUI(userData);
                 document.getElementById('user-menu').classList.remove('hidden');
 
                 if(userData.isVerified) { show('screen-content'); loadTools(); }
-                else { show('screen-verify'); loadConfig(); }
+                else { show('screen-verify'); loadVerifyLinks(); }
                 loadUsersAdmin();
-            } else { 
+                loadAdminToolsList(); // For deleting
+            } else {
+                show('screen-login');
                 document.getElementById('user-menu').classList.add('hidden');
-                show('screen-login'); 
             }
         });
 
-        window.loginSocial = () => signInWithPopup(auth, new GoogleAuthProvider());
-        window.handleAuth = async () => {
-            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
-            try { await signInWithEmailAndPassword(auth, e, p); } catch { await createUserWithEmailAndPassword(auth, e, p); }
-        };
+        function updateProfileUI(u) {
+            const pic = u.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+            document.getElementById('top-profile-pic').src = pic;
+            document.getElementById('header-pic').src = pic;
+            document.getElementById('profile-pic').src = pic;
+            document.getElementById('top-user-name').innerText = u.name;
+            document.getElementById('profile-name-view').innerText = u.name;
+            document.getElementById('profile-email-view').innerText = u.email;
+        }
 
-        window.logout = () => signOut(auth).then(() => location.reload());
-
-        // --- TOOLS & ADMIN (Original Logic) ---
-        window.uploadTool = async () => {
-            const name = document.getElementById('t_name').value, url = document.getElementById('t_url').value, pic = document.getElementById('t_pic').value;
-            if(name && url) { await addDoc(collection(db, "tools"), { name, url, pic, time: Date.now() }); alert("Tool Added!"); }
-        };
-
-        function loadTools() {
+        // --- Tool Management (Load & Delete) ---
+        window.loadTools = () => {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
                 const list = document.getElementById('tools-list'); list.innerHTML = "";
                 snap.forEach(d => {
                     const data = d.data();
                     list.innerHTML += `<div class="tool-card">
                         <img src="${data.pic || 'https://via.placeholder.com/60'}" class="tool-img">
-                        <div><b>${data.name}</b><br><a href="${data.url}" class="dl-link" target="_blank">Download</a></div>
+                        <div><b>${data.name}</b><div class="action-btns">
+                            <a href="${data.url}" class="dl-link" target="_blank">Download</a>
+                            ${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">Video</a>` : ''}
+                        </div></div></div>`;
+                });
+            });
+        };
+
+        window.loadAdminToolsList = () => {
+            onSnapshot(collection(db, "tools"), (snap) => {
+                const list = document.getElementById('admin-tools-manage'); list.innerHTML = "";
+                snap.forEach(d => {
+                    list.innerHTML += `<div class="admin-item">
+                        <span>${d.data().name}</span>
+                        <button class="del-btn" onclick="deleteTool('${d.id}')">Delete</button>
                     </div>`;
                 });
             });
-        }
-
-        window.askAdminPass = () => {
-            document.getElementById('profile-dropdown').classList.remove('active');
-            if(prompt("Admin Pin:") === "killer786") show('screen-admin');
         };
 
-        window.updateProfile = async () => {
-            const n = document.getElementById('edit-name').value;
-            if(n) { await updateDoc(doc(db, "users", auth.currentUser.uid), { name: n }); alert("Name Updated!"); location.reload(); }
+        window.deleteTool = async (id) => { if(confirm("Delete this tool?")) await deleteDoc(doc(db, "tools", id)); };
+
+        window.uploadTool = async () => {
+            const name = document.getElementById('t_name').value, url = document.getElementById('t_url').value, pic = document.getElementById('t_pic').value, vid = document.getElementById('t_vid').value;
+            if(name && url) { await addDoc(collection(db, "tools"), { name, url, pic, vid, time: Date.now() }); alert("Added!"); }
         };
 
-        // --- OTHER UTILS ---
-        function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
-        window.markStep = (id) => { document.getElementById(id+'_link').style.background = "var(--primary)"; };
-        window.startTimer = () => { /* Original Timer Logic */ };
-        async function loadConfig() { /* Original Config Logic */ }
-        function loadUsersAdmin() { /* Original Admin Logic */ }
+        // --- Other Admin Functions ---
+        window.updateSettings = async () => {
+            await setDoc(doc(db, "config", "main"), { tk: document.getElementById('set_tk').value, yt: document.getElementById('set_yt').value, wa: document.getElementById('set_wa').value });
+            alert("Links Saved!");
+        };
 
-        // Close dropdown when clicking outside
-        window.onclick = function(event) {
-            if (!event.target.closest('.user-menu-container')) {
-                document.getElementById('profile-dropdown').classList.remove('active');
+        async function loadVerifyLinks() {
+            const snap = await getDoc(doc(db, "config", "main"));
+            if(snap.exists()){
+                const d = snap.data();
+                document.getElementById('s1_link').href = d.tk; document.getElementById('s2_link').href = d.yt; document.getElementById('s3_link').href = d.wa;
+                document.getElementById('set_tk').value = d.tk; document.getElementById('set_yt').value = d.yt; document.getElementById('set_wa').value = d.wa;
             }
         }
+
+        window.loadUsersAdmin = () => {
+            onSnapshot(collection(db, "users"), (snap) => {
+                const list = document.getElementById('admin-users-list'); list.innerHTML = "";
+                snap.forEach(d => {
+                    const u = d.data();
+                    list.innerHTML += `<div class="admin-item">
+                        <span>${u.name}</span>
+                        <button onclick="toggleBlock('${d.id}', ${u.isBlocked})" style="color:${u.isBlocked?'#2ed573':'#ff4757'}; background:none; border:none; cursor:pointer; font-weight:bold;">${u.isBlocked?'UNBLOCK':'BLOCK'}</button>
+                    </div>`;
+                });
+            });
+        };
+
+        window.toggleBlock = async (uid, status) => { await updateDoc(doc(db, "users", uid), { isBlocked: !status }); };
+
+        // --- Core UI Logic ---
+        window.markStep = (n) => { stepsCount++; if(stepsCount >= 3) document.getElementById('unlock-btn').classList.remove('hidden'); };
+        window.startTimer = () => {
+            document.getElementById('timer-box').classList.remove('hidden'); let t = 15;
+            let itv = setInterval(async () => {
+                t--; document.getElementById('sec').innerText = t;
+                if(t <= 0) { clearInterval(itv); await updateDoc(doc(db, "users", auth.currentUser.uid), { isVerified: true }); location.reload(); }
+            }, 1000);
+        };
+
+        window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
+        window.tab = (t) => {
+            document.getElementById('profile-dropdown').classList.remove('active');
+            document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools');
+            document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile');
+            document.getElementById('view-title').innerText = t.toUpperCase();
+        };
+
+        window.handleAuth = async () => {
+            const e = document.getElementById('user-email').value, p = document.getElementById('user-pass').value;
+            try { await signInWithEmailAndPassword(auth, e, p); } catch { await createUserWithEmailAndPassword(auth, e, p); }
+        };
+        window.loginSocial = () => signInWithPopup(auth, new GoogleAuthProvider());
+        window.logout = () => signOut(auth).then(() => location.reload());
+        window.updateProfile = async () => {
+            const n = document.getElementById('edit-name').value;
+            if(n) { await updateDoc(doc(db, "users", auth.currentUser.uid), { name: n }); alert("Updated!"); location.reload(); }
+        };
+        window.askAdminPass = () => { if(prompt("Admin Pin:") === "killer786") show('screen-admin'); };
+        function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
+        window.onclick = (e) => { if(!e.target.closest('.user-menu-container')) document.getElementById('profile-dropdown').classList.remove('active'); };
     </script>
 </body>
 </html>
