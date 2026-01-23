@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | ULTIMATE PRO</title>
+    <title>GAMING HUB | ULTIMATE SETUP</title>
     <style>
         :root { --primary: #00d2ff; --bg: #0f172a; --glass: rgba(30, 41, 59, 0.7); --danger: #ef4444; --video: #ff0050; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -11,7 +11,7 @@
         .container { width: 100%; max-width: 420px; padding: 20px; text-align: center; }
         .glass-card { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 24px; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         
-        /* Pass Field */
+        /* Pass Field with Eye */
         .pass-container { position: relative; width: 100%; margin: 8px 0; }
         input { width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 12px; outline: none; }
         .eye-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; }
@@ -19,6 +19,7 @@
         .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: none; background: var(--primary); color: #000; cursor: pointer; font-weight: 700; border-radius: 12px; transition: 0.3s; }
         .contact-btn { background: #25d366; color: white; margin-top: 15px; font-size: 0.85rem; text-decoration: none; display: inline-block; padding: 10px 20px; border-radius: 10px; font-weight: bold; }
         
+        /* Tool Cards */
         .tool-card { background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px; border-radius: 20px; display: flex; align-items: center; gap: 12px; text-align: left; }
         .highlight { border: 2px solid var(--primary); box-shadow: 0 0 20px var(--primary); }
         .tool-img { width: 60px; height: 60px; border-radius: 15px; object-fit: cover; background: #334155; }
@@ -28,8 +29,8 @@
         .vid-link { color: #fff; border: 1px solid var(--video); text-decoration: none; font-size: 0.7rem; padding: 6px 9px; border-radius: 6px; }
         
         .hidden { display: none !important; }
-        #admin-btn { position: fixed; bottom: 20px; right: 20px; opacity: 0.4; cursor: pointer; font-size: 1.5rem; }
-        .admin-item { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 12px; margin-bottom: 10px; text-align: left; border-left: 4px solid var(--primary); }
+        #admin-btn { position: fixed; bottom: 20px; right: 20px; opacity: 0.3; cursor: pointer; font-size: 1.5rem; }
+        .admin-item { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 12px; margin-bottom: 10px; text-align: left; border-left: 4px solid var(--primary); font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -44,18 +45,18 @@
                 <input type="password" id="user-pass" placeholder="Password">
                 <span class="eye-icon" onclick="togglePass()">👁️</span>
             </div>
-            <button class="btn" onclick="handleAuth()">Login Access</button>
-            <a href="#" id="login-contact" class="contact-btn" target="_blank">Chat Support</a>
+            <button class="btn" onclick="handleAuth()">Access Database</button>
+            <a href="#" id="login-contact" class="contact-btn" target="_blank">WhatsApp Support</a>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h1>Verification</h1>
+        <h1>Verify Steps</h1>
         <div class="glass-card">
-            <button class="btn" id="s1" onclick="markStep('s1')">Verify Step 1</button>
-            <button class="btn" id="s2" onclick="markStep('s2')">Verify Step 2</button>
-            <button class="btn" id="s3" onclick="markStep('s3')">Verify Step 3</button>
-            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">Unlock Database</button>
+            <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep('s1')">Step 1: TikTok</a>
+            <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep('s2')">Step 2: YouTube</a>
+            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep('s3')">Step 3: WhatsApp</a>
+            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">Unlock Tools</button>
             <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">Processing: <span id="sec">15</span>s</p>
         </div>
     </div>
@@ -63,28 +64,32 @@
     <div id="screen-tools" class="container hidden">
         <h1 id="hub-title">Tools Hub</h1>
         <div id="tools-list" style="margin-top:20px;"></div>
-        <a href="#" id="tools-contact" class="contact-btn" style="width: 100%;" target="_blank">Help? Contact Admin</a>
-        <button class="btn" style="background:none; color:var(--danger); border:1px solid var(--danger); margin-top:20px;" onclick="logout()">Logout Session</button>
+        <a href="#" id="tools-contact" class="contact-btn" style="width: 100%;" target="_blank">Contact Admin</a>
+        <button class="btn" style="background:none; color:var(--danger); border:1px solid var(--danger); margin-top:20px;" onclick="logout()">Logout</button>
     </div>
 
     <div id="screen-admin" class="container hidden">
         <h1>Admin Control</h1>
-        <div class="glass-card" style="text-align: left;">
-            <p style="font-size: 0.8rem; color: var(--primary);">Add Tool Details:</p>
-            <input type="text" id="tool-name" placeholder="Name">
-            <input type="text" id="tool-url" placeholder="Download URL">
-            <input type="text" id="tool-pic" placeholder="Icon URL">
-            <input type="text" id="tool-vid" placeholder="Tutorial Video URL">
-            <button class="btn" onclick="uploadTool()">Deploy Tool</button>
+        <div class="glass-card" style="text-align: left; max-height: 80vh; overflow-y: auto;">
+            <p style="color:var(--primary); font-weight:bold;">Add Tool:</p>
+            <input type="text" id="t_name" placeholder="Name">
+            <input type="text" id="t_url" placeholder="Download URL">
+            <input type="text" id="t_pic" placeholder="Icon URL">
+            <input type="text" id="t_vid" placeholder="Tutorial Video URL">
+            <button class="btn" onclick="uploadTool()">Upload Tool</button>
             
             <hr style="margin:20px 0; opacity:0.1;">
-            <p style="font-size: 0.8rem; color: var(--primary);">Contact Settings:</p>
-            <input type="text" id="admin-phone" placeholder="WhatsApp (e.g. 919876543210)">
-            <button class="btn" style="background: #fff;" onclick="updateContact()">Update Number</button>
+            <p style="color:var(--primary); font-weight:bold;">Settings (TikTok, YT, WA):</p>
+            <input type="text" id="set_tk" placeholder="TikTok Link">
+            <input type="text" id="set_yt" placeholder="YouTube Link">
+            <input type="text" id="set_wa" placeholder="WhatsApp Group Link">
+            <input type="text" id="set_phone" placeholder="WhatsApp Number (91...)">
+            <button class="btn" style="background: #fff;" onclick="updateSettings()">Save Settings</button>
             
             <hr style="margin:20px 0; opacity:0.1;">
-            <div id="admin-tools-list" style="max-height: 200px; overflow-y: auto;"></div>
-            <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">Back to Hub</button>
+            <p style="color:var(--primary); font-weight:bold;">Manage Tools:</p>
+            <div id="admin-tools-list"></div>
+            <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">Back</button>
         </div>
     </div>
 
@@ -114,21 +119,30 @@
             p.type = p.type === "password" ? "text" : "password";
         };
 
-        async function fetchContact() {
-            const snap = await getDoc(doc(db, "settings", "contact"));
-            if (snap.exists()) {
-                const link = `https://wa.me/${snap.data().number}`;
-                document.getElementById('login-contact').href = link;
-                document.getElementById('tools-contact').href = link;
-                document.getElementById('admin-phone').value = snap.data().number;
+        async function loadSettings() {
+            const snap = await getDoc(doc(db, "config", "main"));
+            if(snap.exists()){
+                const d = snap.data();
+                document.getElementById('s1_link').href = d.tk;
+                document.getElementById('s2_link').href = d.yt;
+                document.getElementById('s3_link').href = d.wa;
+                document.getElementById('login-contact').href = `https://wa.me/${d.phone}`;
+                document.getElementById('tools-contact').href = `https://wa.me/${d.phone}`;
+                document.getElementById('set_tk').value = d.tk;
+                document.getElementById('set_yt').value = d.yt;
+                document.getElementById('set_wa').value = d.wa;
+                document.getElementById('set_phone').value = d.phone;
             }
         }
 
-        window.updateContact = async () => {
-            const num = document.getElementById('admin-phone').value;
-            await setDoc(doc(db, "settings", "contact"), { number: num });
-            alert("Contact Updated!");
-            fetchContact();
+        window.updateSettings = async () => {
+            await setDoc(doc(db, "config", "main"), {
+                tk: document.getElementById('set_tk').value,
+                yt: document.getElementById('set_yt').value,
+                wa: document.getElementById('set_wa').value,
+                phone: document.getElementById('set_phone').value
+            });
+            alert("Settings Updated!"); loadSettings();
         };
 
         window.handleAuth = async () => {
@@ -138,23 +152,22 @@
         };
 
         onAuthStateChanged(auth, (user) => {
-            if(user) {
-                document.getElementById('admin-btn').classList.remove('hidden');
-                show('screen-verify');
-                fetchContact();
-            }
+            if(user) { document.getElementById('admin-btn').classList.remove('hidden'); show('screen-verify'); loadSettings(); }
         });
 
-        window.deleteTool = async (id) => {
-            if(confirm("Confirm Delete Tool?")) {
-                await deleteDoc(doc(db, "tools", id));
-                alert("Tool Deleted!");
+        window.uploadTool = async () => {
+            const name = document.getElementById('t_name').value;
+            const url = document.getElementById('t_url').value;
+            const pic = document.getElementById('t_pic').value;
+            const vid = document.getElementById('t_vid').value;
+            if(name && url) {
+                await addDoc(collection(db, "tools"), { name, url, pic, vid, time: Date.now() });
+                alert("Tool Added!");
             }
         };
 
-        window.copyLink = (text) => {
-            navigator.clipboard.writeText(text).then(() => alert("YouTube Link Copied!"));
-        };
+        window.deleteTool = async (id) => { if(confirm("Delete Tool?")) await deleteDoc(doc(db, "tools", id)); };
+        window.copyLink = (t) => { navigator.clipboard.writeText(t).then(()=>alert("YouTube Link Copied!")); };
 
         function loadTools() {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
@@ -166,59 +179,33 @@
                     const isTarget = d.id === directId;
                     const img = data.pic || 'https://cdn-icons-png.flaticon.com/512/2302/2302834.png';
                     
-                    list.innerHTML += `
-                        <div class="tool-card ${isTarget ? 'highlight' : ''}" id="${d.id}">
-                            <img src="${img}" class="tool-img">
-                            <div class="tool-info">
-                                <b>${data.name}</b>
-                                <div class="action-btns">
-                                    <a href="${data.url}" class="dl-link" target="_blank">DOWNLOAD</a>
-                                    ${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">VIDEO</a>` : ''}
-                                </div>
+                    list.innerHTML += `<div class="tool-card ${isTarget ? 'highlight' : ''}" id="${d.id}">
+                        <img src="${img}" class="tool-img">
+                        <div class="tool-info">
+                            <b>${data.name}</b>
+                            <div class="action-btns">
+                                <a href="${data.url}" class="dl-link" target="_blank">DOWNLOAD</a>
+                                ${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">VIDEO</a>` : ''}
                             </div>
-                        </div>`;
+                        </div>
+                    </div>`;
                     
                     const share = `${window.location.origin}${window.location.pathname}?tool=${d.id}`;
-                    adminList.innerHTML += `
-                        <div class="admin-item">
-                            <b>${data.name}</b><br>
-                            <button onclick="copyLink('${share}')" style="margin-top:5px; font-size:10px; cursor:pointer;">COPY YT LINK</button>
-                            <button onclick="deleteTool('${d.id}')" style="color:red; float:right; background:none; border:none; cursor:pointer;">DELETE</button>
-                        </div>`;
+                    adminList.innerHTML += `<div class="admin-item">
+                        <b>${data.name}</b><br>
+                        <button onclick="copyLink('${share}')" style="margin-top:5px; cursor:pointer; font-size:10px;">COPY YT LINK</button>
+                        <button onclick="deleteTool('${d.id}')" style="color:red; float:right; border:none; background:none; cursor:pointer;">DELETE</button>
+                    </div>`;
                 });
-                if(directId) document.getElementById('hub-title').innerText = "Direct Link Tool";
             });
         }
 
-        window.uploadTool = async () => {
-            const n = document.getElementById('tool-name').value;
-            const u = document.getElementById('tool-url').value;
-            const p = document.getElementById('tool-pic').value;
-            const v = document.getElementById('tool-vid').value;
-            if(n && u) {
-                await addDoc(collection(db, "tools"), { name:n, url:u, pic:p, vid:v, time: Date.now() });
-                alert("Deployed!");
-                document.querySelectorAll('#screen-admin input').forEach(i => i.value="");
-            }
-        };
-
-        window.markStep = (id) => { 
-            document.getElementById(id).style.background="#00d2ff"; 
-            window.steps = (window.steps || 0) + 1; 
-            if(window.steps >=3) document.getElementById('unlock-btn').classList.remove('hidden'); 
-        };
-
-        window.startTimer = () => { 
-            document.getElementById('timer-box').classList.remove('hidden'); 
-            let t=15; let itv = setInterval(()=>{ 
-                if(t>0){ t--; document.getElementById('sec').innerText=t; }
-                else{ clearInterval(itv); show('screen-tools'); loadTools(); if(directId) document.getElementById(directId).scrollIntoView(); } 
-            },1000); 
-        };
-
-        window.askAdminPass = () => { if(prompt("PIN:") === "killer786") { show('screen-admin'); loadTools(); fetchContact(); } };
+        window.markStep = (id) => { document.getElementById(id+'_link').style.background="var(--primary)"; window.steps = (window.steps || 0) + 1; if(window.steps >=3) document.getElementById('unlock-btn').classList.remove('hidden'); };
+        window.startTimer = () => { document.getElementById('timer-box').classList.remove('hidden'); let t=15; let itv = setInterval(()=>{ if(t>0){ t--; document.getElementById('sec').innerText=t; }else{ clearInterval(itv); show('screen-tools'); loadTools(); if(directId) document.getElementById(directId).scrollIntoView(); } },1000); };
+        window.askAdminPass = () => { if(prompt("PIN:") === "killer786") { show('screen-admin'); loadTools(); loadSettings(); } };
         window.logout = () => signOut(auth).then(() => location.reload());
         function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
     </script>
 </body>
 </html>
+
