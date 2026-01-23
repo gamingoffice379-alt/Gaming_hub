@@ -3,74 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | PREMIUM</title>
+    <title>GAMING HUB | ULTIMATE EDITION</title>
     <style>
-        :root { 
-            --primary: #00d2ff; /* Modern Blue */
-            --bg: #0f172a; /* Deep Navy Black */
-            --glass: rgba(30, 41, 59, 0.7); 
-            --accent: #38bdf8;
-            --danger: #ef4444;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-        
-        body { 
-            background: radial-gradient(circle at top right, #1e293b, #0f172a);
-            color: #f8fafc; 
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container { width: 100%; max-width: 400px; padding: 20px; text-align: center; }
-        
-        .glass-card { 
-            background: var(--glass); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px; 
-            border-radius: 24px; 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
-            backdrop-filter: blur(20px);
-        }
-
-        h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 800; letter-spacing: -1px; color: #fff; }
-        p.subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; }
-
-        input { 
-            width: 100%; padding: 14px; margin: 8px 0; 
-            background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); 
-            color: #fff; border-radius: 12px; outline: none; transition: 0.3s;
-        }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 210, 255, 0.2); }
-
-        .btn { 
-            display: block; width: 100%; padding: 14px; margin-top: 12px; 
-            border: none; background: var(--primary); 
-            color: #000; cursor: pointer; font-weight: 700; 
-            border-radius: 12px; transition: 0.3s; font-size: 0.9rem;
-        }
-        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
-
-        .google-btn { background: #fff; color: #000; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .guest-btn { background: transparent; color: #94a3b8; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 10px; }
-
-        .tool-card { 
-            background: rgba(255, 255, 255, 0.03); padding: 16px; 
-            border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 12px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            border-radius: 16px; transition: 0.3s;
-        }
-        .tool-card:hover { background: rgba(255, 255, 255, 0.07); }
-
-        .dl-link { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.85rem; padding: 6px 14px; border: 1px solid var(--primary); border-radius: 8px; }
-        .dl-link:hover { background: var(--primary); color: #000; }
-
+        :root { --primary: #00d2ff; --bg: #0f172a; --glass: rgba(30, 41, 59, 0.7); --accent: #38bdf8; --danger: #ef4444; --video-color: #ff0050; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: radial-gradient(circle at top right, #1e293b, #0f172a); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
+        .container { width: 100%; max-width: 420px; padding: 20px; text-align: center; }
+        .glass-card { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 24px; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        input { width: 100%; padding: 12px; margin: 8px 0; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 12px; outline: none; }
+        .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: none; background: var(--primary); color: #000; cursor: pointer; font-weight: 700; border-radius: 12px; transition: 0.3s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
+        .tool-card { background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px; border-radius: 20px; display: flex; align-items: center; gap: 12px; transition: 0.3s; }
+        .highlight { border: 2px solid var(--primary) !important; box-shadow: 0 0 20px var(--primary); transform: scale(1.02); }
+        .tool-img { width: 60px; height: 60px; border-radius: 15px; object-fit: cover; background: #334155; }
+        .tool-info { flex: 1; text-align: left; }
+        .tool-name { font-weight: 700; font-size: 1rem; color: #fff; display: block; margin-bottom: 5px; }
+        .action-btns { display: flex; gap: 8px; }
+        .dl-link { color: #000; background: var(--primary); text-decoration: none; font-size: 0.75rem; padding: 8px 12px; border-radius: 8px; font-weight: bold; }
+        .vid-link { color: #fff; border: 1px solid var(--video-color); text-decoration: none; font-size: 0.75rem; padding: 7px 10px; border-radius: 8px; font-weight: 600; }
         .hidden { display: none !important; }
-        #admin-btn { position: fixed; bottom: 30px; right: 30px; font-size: 1.2rem; cursor: pointer; opacity: 0.3; color: #fff; }
-        
-        .del-btn { color: var(--danger); font-size: 0.75rem; cursor: pointer; font-weight: 600; }
+        #admin-btn { position: fixed; bottom: 20px; right: 20px; opacity: 0.4; cursor: pointer; font-size: 1.5rem; }
+        .admin-item { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; margin-bottom: 10px; font-size: 0.8rem; border-left: 3px solid var(--primary); }
     </style>
 </head>
 <body>
@@ -79,66 +32,55 @@
 
     <div id="screen-login" class="container">
         <h1>Gaming Hub</h1>
-        <p class="subtitle">Enter your credentials to access tools</p>
         <div class="glass-card">
-            <input type="email" id="user-email" placeholder="Email Address">
+            <input type="email" id="user-email" placeholder="Email">
             <input type="password" id="user-pass" placeholder="Password">
-            <button class="btn" onclick="handleAuth()">Login / Sign Up</button>
-            
-            <button class="btn google-btn" onclick="loginWithGoogle()">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18"> Continue with Google
-            </button>
-            <button class="btn guest-btn" onclick="loginAnonymously()">Continue as Guest</button>
+            <button class="btn" onclick="handleAuth()">Access Database</button>
+            <button class="btn" style="background:#fff; color:#000;" onclick="loginWithGoogle()">Google Identity</button>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h1>Verification</h1>
-        <p class="subtitle">Complete steps to unlock database</p>
+        <h1>Clearance</h1>
         <div class="glass-card">
-            <div id="user-profile" style="margin-bottom: 20px;">
-                <img id="u-img" src="" class="hidden" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary);">
-                <p id="u-name" style="font-weight: 600; margin-top: 5px;"></p>
-            </div>
-            
-            <a href="#" target="_blank" class="btn guest-btn" id="s1" onclick="markStep('s1')">Verify TikTok</a>
-            <a href="#" target="_blank" class="btn guest-btn" id="s2" onclick="markStep('s2')">Verify YouTube</a>
-            <a href="#" target="_blank" class="btn guest-btn" id="s3" onclick="markStep('s3')">Join WhatsApp</a>
-            
-            <div id="timer-box" class="hidden" style="margin:20px; color: var(--primary);">
-                Decrypting: <span id="sec">15</span>s
-            </div>
-            <button id="unlock-btn" class="btn hidden" style="background: var(--accent); color: #000;" onclick="startTimer()">Unlock Database</button>
+            <p id="u-name" style="color:var(--primary); font-weight:bold; margin-bottom:15px;"></p>
+            <a href="#" target="_blank" class="btn" id="s1" style="background:rgba(255,255,255,0.1); color:#fff;" onclick="markStep('s1')">Verify TikTok</a>
+            <a href="#" target="_blank" class="btn" id="s2" style="background:rgba(255,255,255,0.1); color:#fff;" onclick="markStep('s2')">Verify YouTube</a>
+            <a href="#" target="_blank" class="btn" id="s3" style="background:rgba(255,255,255,0.1); color:#fff;" onclick="markStep('s3')">Join WhatsApp</a>
+            <button id="unlock-btn" class="btn hidden" style="background:gold; color:#000;" onclick="startTimer()">Start Decryption</button>
+            <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">Unlocking... <span id="sec">15</span>s</p>
         </div>
     </div>
 
     <div id="screen-tools" class="container hidden">
-        <h1>Database</h1>
-        <input type="text" id="tool-search" placeholder="Search for tools..." onkeyup="filterTools()">
-        <div id="tools-list" style="margin-top: 20px;"></div>
-        <button class="btn guest-btn" style="border:none; color: var(--danger);" onclick="logout()">Logout</button>
+        <h1 id="hub-title">Tools Hub</h1>
+        <input type="text" id="tool-search" placeholder="Search tools..." onkeyup="filterTools()">
+        <div id="tools-list" style="margin-top:20px;"></div>
+        <button class="btn" style="background:none; color:var(--danger); border:1px solid var(--danger);" onclick="logout()">Logout</button>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <h1>Admin Panel</h1>
-        <div class="glass-card">
+        <h1>Admin Control</h1>
+        <div class="glass-card" style="margin-top:20px; text-align: left;">
             <input type="text" id="tool-name" placeholder="Tool Name">
-            <input type="text" id="tool-url" placeholder="Download URL">
-            <button class="btn" onclick="uploadTool()">Add Tool</button>
-            
-            <div id="admin-tools-list" style="margin: 20px 0; text-align: left; max-height: 150px; overflow-y: auto;"></div>
-
+            <input type="text" id="tool-url" placeholder="Download Link">
+            <input type="text" id="tool-pic" placeholder="Icon Image URL">
+            <input type="text" id="tool-vid" placeholder="Tutorial Video URL">
+            <button class="btn" onclick="uploadTool()">Upload Tool</button>
+            <hr style="margin:20px 0; opacity:0.1;">
             <input type="text" id="link-tk" placeholder="TikTok Link">
             <input type="text" id="link-yt" placeholder="YouTube Link">
             <input type="text" id="link-wa" placeholder="WhatsApp Link">
-            <button class="btn guest-btn" onclick="updateSocials()">Update Links</button>
-            <button class="btn guest-btn" style="border:none;" onclick="show('screen-tools')">Back</button>
+            <button class="btn" style="background:gold; color:#000;" onclick="updateSocials()">Update All Links</button>
+            <hr style="margin:20px 0; opacity:0.1;">
+            <div id="admin-tools-list" style="max-height: 200px; overflow-y: auto;"></div>
+            <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">Back</button>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInAnonymously, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -155,6 +97,9 @@
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const directToolId = urlParams.get('tool');
+
         window.handleAuth = async () => {
             const email = document.getElementById('user-email').value;
             const pass = document.getElementById('user-pass').value;
@@ -162,44 +107,21 @@
             catch (e) { try { await createUserWithEmailAndPassword(auth, email, pass); } catch(err) { alert(err.message); } }
         };
         window.loginWithGoogle = () => signInWithPopup(auth, provider);
-        window.loginAnonymously = () => signInAnonymously(auth);
         window.logout = () => signOut(auth).then(() => location.reload());
 
         onAuthStateChanged(auth, async (user) => {
             if(user) {
-                document.getElementById('u-name').innerText = user.isAnonymous ? "Guest Mode" : (user.displayName || user.email);
-                if(user.photoURL) { 
-                    document.getElementById('u-img').src = user.photoURL;
-                    document.getElementById('u-img').classList.remove('hidden');
-                }
+                document.getElementById('u-name').innerText = "WELCOME: " + (user.displayName || user.email.split('@')[0]).toUpperCase();
                 const s = await getDoc(doc(db, "settings", "socials"));
                 if(s.exists()){
                     document.getElementById('s1').href = s.data().tk;
                     document.getElementById('s2').href = s.data().yt;
                     document.getElementById('s3').href = s.data().wa;
                 }
-                if(!user.isAnonymous) document.getElementById('admin-btn').classList.remove('hidden');
+                document.getElementById('admin-btn').classList.remove('hidden');
                 show('screen-verify');
             }
         });
-
-        let steps = new Set();
-        window.markStep = (id) => {
-            document.getElementById(id).style.borderColor = "var(--primary)";
-            document.getElementById(id).style.color = "var(--primary)";
-            steps.add(id);
-            if(steps.size >= 3) document.getElementById('unlock-btn').classList.remove('hidden');
-        };
-
-        window.startTimer = () => {
-            document.getElementById('unlock-btn').classList.add('hidden');
-            document.getElementById('timer-box').classList.remove('hidden');
-            let t = 15;
-            let itv = setInterval(() => {
-                t--; document.getElementById('sec').innerText = t;
-                if(t<=0) { clearInterval(itv); show('screen-tools'); loadTools(); }
-            }, 1000);
-        };
 
         function loadTools() {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
@@ -207,36 +129,56 @@
                 const adminList = document.getElementById('admin-tools-list');
                 list.innerHTML = ""; adminList.innerHTML = "";
                 snap.forEach(d => {
-                    list.innerHTML += `<div class="tool-card"><span>${d.data().name}</span><a href="${d.data().url}" target="_blank" class="dl-link">Download</a></div>`;
-                    adminList.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>${d.data().name}</span><span class="del-btn" onclick="deleteTool('${d.id}')">Delete</span></div>`;
+                    const data = d.data();
+                    const isTarget = d.id === directToolId;
+                    const img = data.pic || 'https://cdn-icons-png.flaticon.com/512/2302/2302834.png';
+                    
+                    list.innerHTML += `<div class="tool-card ${isTarget ? 'highlight' : ''}" id="${d.id}">
+                        <img src="${img}" class="tool-img">
+                        <div class="tool-info">
+                            <span class="tool-name">${data.name}</span>
+                            <div class="action-btns">
+                                <a href="${data.url}" target="_blank" class="dl-link">DOWNLOAD</a>
+                                ${data.vid ? `<a href="${data.vid}" target="_blank" class="vid-link">VIDEO</a>` : ''}
+                            </div>
+                        </div>
+                    </div>`;
+                    
+                    const shareLink = `${window.location.origin}${window.location.pathname}?tool=${d.id}`;
+                    adminList.innerHTML += `<div class="admin-item">
+                        <strong>${data.name}</strong><br>
+                        <button onclick="copyLink('${shareLink}')" style="background:var(--primary); color:#000; border:none; padding:2px 5px; border-radius:4px; margin-top:5px; cursor:pointer; font-size:10px;">COPY YT LINK</button>
+                        <button onclick="deleteTool('${d.id}')" style="color:var(--danger); background:none; border:none; float:right; cursor:pointer;">Delete</button>
+                    </div>`;
                 });
             });
         }
 
-        window.deleteTool = async (id) => { if(confirm("Delete this?")) await deleteDoc(doc(db, "tools", id)); };
+        window.copyLink = (text) => { navigator.clipboard.writeText(text).then(() => alert("YouTube Link Copied!")); };
         window.uploadTool = async () => {
             const name = document.getElementById('tool-name').value;
             const url = document.getElementById('tool-url').value;
-            await addDoc(collection(db, "tools"), { name, url, time: Date.now() });
-            alert("Added!");
+            const pic = document.getElementById('tool-pic').value;
+            const vid = document.getElementById('tool-vid').value;
+            await addDoc(collection(db, "tools"), { name, url, pic, vid, time: Date.now() });
+            alert("Tool Added!");
         };
+
         window.updateSocials = async () => {
             const tk = document.getElementById('link-tk').value;
             const yt = document.getElementById('link-yt').value;
             const wa = document.getElementById('link-wa').value;
             await setDoc(doc(db, "settings", "socials"), { tk, yt, wa });
-            alert("Updated!");
+            alert("Links Updated!");
         };
+
+        window.deleteTool = async (id) => { if(confirm("Delete this?")) await deleteDoc(doc(db, "tools", id)); };
+        window.markStep = (id) => { document.getElementById(id).style.background="var(--primary)"; window.steps = (window.steps || 0) + 1; if(window.steps >=3) document.getElementById('unlock-btn').classList.remove('hidden'); };
+        window.startTimer = () => { document.getElementById('timer-box').classList.remove('hidden'); document.getElementById('unlock-btn').classList.add('hidden'); let t=15; let itv = setInterval(()=>{ if(t>0){ t--; document.getElementById('sec').innerText=t; }else{ clearInterval(itv); show('screen-tools'); loadTools(); if(directToolId) document.getElementById(directToolId).scrollIntoView(); } },1000); };
         window.askAdminPass = () => { if(prompt("PIN:") === "killer786") { show('screen-admin'); loadTools(); } };
-        window.filterTools = () => {
-            let val = document.getElementById('tool-search').value.toLowerCase();
-            let items = document.getElementsByClassName('tool-card');
-            for(let i of items) i.style.display = i.innerText.toLowerCase().includes(val) ? "flex" : "none";
-        };
-        function show(id) {
-            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-        }
+        window.filterTools = () => { let val = document.getElementById('tool-search').value.toLowerCase(); let items = document.getElementsByClassName('tool-card'); for(let i of items) i.style.display = i.innerText.toLowerCase().includes(val) ? "flex" : "none"; };
+        function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
     </script>
 </body>
 </html>
+
