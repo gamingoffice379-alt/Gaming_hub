@@ -5,89 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAMING HUB | PRO ACCESS</title>
     <style>
-        :root { --primary: #00ff41; --bg: #000; --glass: rgba(0, 20, 0, 0.9); --accent: #ff00ff; --admin-color: #00d9ff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+        :root { 
+            --primary: #00ff41; 
+            --bg: #000; 
+            --glass: rgba(0, 25, 0, 0.85); 
+            --admin-color: #00d9ff; 
+            --google-blue: #4285F4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--bg); color: var(--primary); overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; }
-        .container { max-width: 480px; margin: 30px auto; padding: 20px; text-align: center; position: relative; z-index: 10; }
-        .glass-card { background: var(--glass); border: 1px solid var(--primary); padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,65,0.2); backdrop-filter: blur(10px); }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--primary); color: var(--primary); outline: none; border-radius: 5px; }
-        .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; border-radius: 5px; }
-        .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
-        .admin-box { border: 1px dashed var(--admin-color); padding: 15px; margin-top: 20px; color: var(--admin-color); border-radius: 8px; }
-        .hidden { display: none !important; }
-        .social-link { display: block; padding: 15px; margin-bottom: 10px; border: 1px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: bold; border-radius: 5px; }
-        .completed { background: var(--primary) !important; color: black !important; }
-        .tool-card { background: rgba(0,0,0,0.8); padding: 15px; border: 1px solid var(--primary); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; }
         
-        /* New Admin Floating Button */
-        #admin-trigger { position: fixed; top: 10px; right: 10px; z-index: 99; background: #111; border: 1px solid var(--admin-color); padding: 8px; border-radius: 50%; cursor: pointer; color: var(--admin-color); }
-        .auth-toggle { margin-top: 15px; font-size: 0.8rem; cursor: pointer; color: #58a6ff; text-decoration: underline; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
+
+        .container { max-width: 420px; margin: 40px auto; padding: 20px; text-align: center; position: relative; z-index: 10; }
+        
+        .glass-card { 
+            background: var(--glass); 
+            border: 1px solid var(--primary); 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.2); 
+            backdrop-filter: blur(15px);
+        }
+
+        .user-profile { margin-bottom: 20px; }
+        .user-profile img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 10px; }
+
+        h1 { font-size: 2.5rem; margin-bottom: 25px; letter-spacing: 5px; text-shadow: 0 0 15px var(--primary); }
+
+        input { 
+            width: 100%; padding: 14px; margin: 10px 0; 
+            background: rgba(0,0,0,0.8); border: 1px solid var(--primary); 
+            color: var(--primary); border-radius: 10px; outline: none;
+        }
+
+        .btn { 
+            display: block; width: 100%; padding: 15px; margin-top: 10px; 
+            border: 1px solid var(--primary); background: transparent; 
+            color: var(--primary); cursor: pointer; font-weight: bold; 
+            text-transform: uppercase; border-radius: 10px; transition: 0.4s;
+        }
+        .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
+
+        .google-btn { border-color: var(--google-blue); color: var(--google-blue); margin-top: 15px; }
+        .google-btn:hover { background: var(--google-blue); color: #fff; }
+
+        .tool-card { 
+            background: rgba(0, 30, 0, 0.7); padding: 15px; 
+            border: 1px solid var(--primary); margin-bottom: 10px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-radius: 12px;
+        }
+
+        .hidden { display: none !important; }
+        #admin-btn { position: fixed; bottom: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; opacity: 0.4; z-index: 100; }
     </style>
 </head>
 <body>
 
     <canvas id="matrix"></canvas>
-
-    <div id="admin-trigger" class="hidden" onclick="askAdminPass()">⚙️</div>
+    <div id="admin-btn" class="hidden" onclick="askAdminPass()">⚙️</div>
 
     <div id="screen-login" class="container">
-        <h1 style="font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 10px var(--primary);">GAMING HUB</h1>
+        <h1>GAMING HUB</h1>
         <div class="glass-card">
-            <h3 id="auth-mode-title">USER LOGIN</h3>
-            <input type="email" id="user-email" placeholder="EMAIL ADDRESS">
+            <h3 style="margin-bottom: 15px;">SECURE ACCESS</h3>
+            <input type="email" id="user-email" placeholder="EMAIL">
             <input type="password" id="user-pass" placeholder="PASSWORD">
-            <button id="auth-btn" class="btn" onclick="handleMainAuth()">INITIALIZE ACCESS</button>
-            <p class="auth-toggle" onclick="toggleAuthMode()" id="toggle-text">Don't have an account? Sign Up</p>
-        </div>
-    </div>
-
-    <div id="screen-admin" class="container hidden">
-        <h2 style="color: var(--admin-color);">ADMIN TERMINAL</h2>
-        <div class="glass-card" style="border-color: var(--admin-color);">
-            <div class="admin-box" style="border-color: #ff4444; color: #ff4444;">
-                <p>⚙️ ADMIN ACCESS PIN</p>
-                <input type="password" id="new-admin-pass" placeholder="New Admin PIN">
-                <button class="btn" style="border-color: #ff4444;" onclick="updateAdminPass()">UPDATE PIN</button>
-            </div>
-            <div class="admin-box">
-                <p>SOCIAL LINK LOCKER</p>
-                <input type="text" id="link-tiktok" placeholder="TikTok URL">
-                <input type="text" id="link-yt" placeholder="YouTube URL">
-                <input type="text" id="link-wa" placeholder="WhatsApp URL">
-                <button class="btn" onclick="updateSocialLinks()">SAVE LINKS</button>
-            </div>
-            <div class="admin-box">
-                <p>UPLOAD TOOL</p>
-                <input type="text" id="tool-name" placeholder="Tool Name">
-                <input type="text" id="tool-url" placeholder="Download URL">
-                <button class="btn" onclick="uploadTool()">SEND TO CLOUD</button>
-            </div>
-            <button class="btn" onclick="location.reload()">EXIT ADMIN</button>
+            <button class="btn" onclick="handleAuth()">LOGIN / SIGNUP</button>
+            <button class="btn google-btn" onclick="loginWithGoogle()">CONTINUE WITH GOOGLE</button>
+            <button class="btn" style="border-color: #666; color: #888; margin-top: 10px; font-size: 0.8rem;" onclick="loginAsGuest()">GUEST ACCESS</button>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h2>VERIFY IDENTITY</h2>
-        <div class="glass-card">
-            <a href="#" target="_blank" class="social-link" id="s1" onclick="markStep('s1')">FOLLOW TIKTOK</a>
-            <a href="#" target="_blank" class="social-link" id="s2" onclick="markStep('s2')">SUBSCRIBE YOUTUBE</a>
-            <a href="#" target="_blank" class="social-link" id="s3" onclick="markStep('s3')">JOIN WHATSAPP</a>
-            <div id="timer-box" style="display:none; color:gold; margin:15px;">WAITING: <span id="sec">15</span>s</div>
-            <button id="gen-btn" class="btn" style="display:none;" onclick="startTimer()">ACCESS DATABASE</button>
+        <h2>CLEARANCE</h2>
+        <div class="glass-card" style="margin-top:20px;">
+            <div id="user-info" class="user-profile">
+                <img id="u-img" src="" class="hidden">
+                <p id="u-name" style="color: gold; font-weight: bold;"></p>
+            </div>
+            
+            <a href="#" target="_blank" class="btn" id="s1" onclick="markStep('s1')">VERIFY TIKTOK</a>
+            <a href="#" target="_blank" class="btn" id="s2" onclick="markStep('s2')">VERIFY YOUTUBE</a>
+            <a href="#" target="_blank" class="btn" id="s3" onclick="markStep('s3')">JOIN WHATSAPP</a>
+            
+            <div id="timer-box" class="hidden" style="color:gold; margin:20px; border: 1px dashed gold; padding: 10px;">
+                DECRYPTING DATABASE: <span id="sec">15</span>s
+            </div>
+            <button id="unlock-btn" class="btn hidden" style="border-color:gold; color:gold;" onclick="startTimer()">START DECRYPTION</button>
         </div>
     </div>
 
     <div id="screen-tools" class="container hidden">
-        <h2>DATABASE UNLOCKED</h2>
-        <div id="tools-list" style="margin-top:20px;"></div>
-        <button class="btn" style="margin-top:30px; border-color:red; color:red" onclick="location.reload()">LOGOUT</button>
+        <h2 style="margin-bottom: 15px;">CENTRAL DATABASE</h2>
+        <input type="text" id="tool-search" placeholder="Search Tools..." onkeyup="filterTools()">
+        <div id="tools-list" style="margin-top: 15px;"></div>
+        <button class="btn" style="margin-top:30px; border-color:#ff4444; color:#ff4444" onclick="logout()">LOGOUT</button>
+    </div>
+
+    <div id="screen-admin" class="container hidden">
+        <h2 style="color: var(--admin-color);">ADMIN PANEL</h2>
+        <div class="glass-card" style="border-color: var(--admin-color); margin-top:10px;">
+            <input type="text" id="tool-name" placeholder="Tool Name">
+            <input type="text" id="tool-url" placeholder="Direct Download URL">
+            <button class="btn" onclick="uploadTool()">DEPLOY TOOL</button>
+            <button class="btn" style="margin-top:10px; border-color:#666;" onclick="show('screen-tools')">CANCEL</button>
+        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInAnonymously, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC9THzTxB73m4OpeNE2tkmafvpExIGWlvg",
@@ -97,119 +127,95 @@
             messagingSenderId: "464029519961",
             appId: "1:464029519961:web:18db325072160f4c48a148"
         };
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
 
-        // --- Auth Toggle ---
-        let isLoginMode = true;
-        window.toggleAuthMode = () => {
-            isLoginMode = !isLoginMode;
-            document.getElementById('auth-mode-title').innerText = isLoginMode ? "USER LOGIN" : "CREATE ACCOUNT";
-            document.getElementById('auth-btn').innerText = isLoginMode ? "INITIALIZE ACCESS" : "REGISTER NOW";
-            document.getElementById('toggle-text').innerText = isLoginMode ? "Don't have an account? Sign Up" : "Already have an account? Login";
-        };
-
-        // --- Main Auth Handler ---
-        window.handleMainAuth = async () => {
+        window.handleAuth = async () => {
             const email = document.getElementById('user-email').value;
             const pass = document.getElementById('user-pass').value;
-            try {
-                if(isLoginMode) await signInWithEmailAndPassword(auth, email, pass);
-                else await createUserWithEmailAndPassword(auth, email, pass);
-            } catch (err) { alert("Auth Failed: " + err.message); }
+            try { await signInWithEmailAndPassword(auth, email, pass); }
+            catch (e) { try { await createUserWithEmailAndPassword(auth, email, pass); } catch(err) { alert(err.message); } }
         };
 
-        // --- Admin Security ---
-        window.askAdminPass = async () => {
-            const passSnap = await getDoc(doc(db, "settings", "adminConfig"));
-            let correctPass = "killer786"; 
-            if(passSnap.exists()) correctPass = passSnap.data().password;
+        window.loginWithGoogle = () => signInWithPopup(auth, provider);
+        window.loginAsGuest = () => signInAnonymously(auth);
+        window.logout = () => signOut(auth).then(() => location.reload());
 
-            const userInput = prompt("ENTER ADMIN SECRET PIN:");
-            if(userInput === correctPass) show('screen-admin');
-            else alert("WRONG PIN!");
-        };
-
-        // --- Monitor Login State ---
-        onAuthStateChanged(auth, async (user) => {
+        onAuthStateChanged(auth, (user) => {
             if(user) {
-                document.getElementById('admin-trigger').classList.remove('hidden');
-                const s = await getDoc(doc(db, "settings", "socials"));
-                if(s.exists()){
-                    document.getElementById('s1').href = s.data().tk;
-                    document.getElementById('s2').href = s.data().yt;
-                    document.getElementById('s3').href = s.data().wa;
+                document.getElementById('u-name').innerText = user.isAnonymous ? "GUEST AGENT" : (user.displayName || user.email);
+                if(user.photoURL) { 
+                    document.getElementById('u-img').src = user.photoURL;
+                    document.getElementById('u-img').classList.remove('hidden');
                 }
+                if(!user.isAnonymous) document.getElementById('admin-btn').classList.remove('hidden');
                 show('screen-verify');
             }
         });
 
-        // --- Admin Functions ---
-        window.updateAdminPass = async () => {
-            const p = document.getElementById('new-admin-pass').value;
-            await setDoc(doc(db, "settings", "adminConfig"), { password: p });
-            alert("Admin PIN Updated!");
+        let steps = new Set();
+        window.markStep = (id) => {
+            document.getElementById(id).style.borderColor = "gold";
+            steps.add(id);
+            if(steps.size >= 3) document.getElementById('unlock-btn').classList.remove('hidden');
         };
 
-        window.updateSocialLinks = async () => {
-            const tk = document.getElementById('link-tiktok').value;
-            const yt = document.getElementById('link-yt').value;
-            const wa = document.getElementById('link-wa').value;
-            await setDoc(doc(db, "settings", "socials"), { tk, yt, wa });
-            alert("Links Saved!");
+        window.startTimer = () => {
+            document.getElementById('unlock-btn').classList.add('hidden');
+            document.getElementById('timer-box').classList.remove('hidden');
+            let t = 15;
+            let itv = setInterval(() => {
+                t--; document.getElementById('sec').innerText = t;
+                if(t<=0) { clearInterval(itv); show('screen-tools'); loadTools(); }
+            }, 1000);
         };
+
+        function loadTools() {
+            onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
+                const list = document.getElementById('tools-list');
+                list.innerHTML = "";
+                snap.forEach(d => {
+                    list.innerHTML += `<div class="tool-card"><span>${d.data().name}</span><a href="${d.data().url}" target="_blank" style="color:var(--primary); text-decoration:none; border:1px solid; padding:5px 12px; border-radius:8px;">GET</a></div>`;
+                });
+            });
+        }
 
         window.uploadTool = async () => {
             const name = document.getElementById('tool-name').value;
             const url = document.getElementById('tool-url').value;
             await addDoc(collection(db, "tools"), { name, url, time: Date.now() });
-            alert("Tool Uploaded!");
+            alert("Success!");
         };
 
-        // --- Step Logic ---
-        let steps = new Set();
-        window.markStep = (id) => {
-            document.getElementById(id).classList.add('completed');
-            steps.add(id);
-            if(steps.size >= 3) document.getElementById('gen-btn').style.display = 'block';
-        };
+        window.askAdminPass = () => { if(prompt("PIN:") === "killer786") show('screen-admin'); };
 
-        window.startTimer = () => {
-            document.getElementById('gen-btn').style.display = 'none';
-            document.getElementById('timer-box').style.display = 'block';
-            let t = 15;
-            let timer = setInterval(() => {
-                t--; document.getElementById('sec').innerText = t;
-                if(t <= 0) { clearInterval(timer); show('screen-tools'); loadData(); }
-            }, 1000);
+        window.filterTools = () => {
+            let val = document.getElementById('tool-search').value.toLowerCase();
+            let items = document.getElementsByClassName('tool-card');
+            for(let i of items) i.style.display = i.innerText.toLowerCase().includes(val) ? "flex" : "none";
         };
-
-        function loadData() {
-            onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (s) => {
-                const l = document.getElementById('tools-list'); l.innerHTML = "";
-                s.forEach(d => l.innerHTML += `<div class="tool-card"><span>${d.data().name}</span><a href="${d.data().url}" target="_blank" style="color:lime">GET</a></div>`);
-            });
-        }
 
         function show(id) {
-            document.querySelectorAll('.container').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
             document.getElementById(id).classList.remove('hidden');
         }
 
-        // --- Matrix (Same as yours) ---
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const drops = Array(Math.floor(canvas.width/16)).fill(1);
+        // MATRIX
+        const c = document.getElementById('matrix');
+        const x = c.getContext('2d');
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        const d = Array(Math.floor(c.width/16)).fill(1);
         setInterval(() => {
-            ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = "#0F0"; drops.forEach((y, i) => {
-                ctx.fillText(String.fromCharCode(Math.random()*128), i*16, y*16);
-                if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++;
+            x.fillStyle = "rgba(0,0,0,0.05)"; x.fillRect(0,0,c.width,c.height);
+            x.fillStyle = "#0F0";
+            d.forEach((y, i) => {
+                x.fillText(String.fromCharCode(Math.random()*128), i*16, y*16);
+                if(y*16 > c.height && Math.random() > 0.975) d[i] = 0; d[i]++;
             });
         }, 35);
     </script>
 </body>
 </html>
-
