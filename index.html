@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | ALL FEATURES FIXED</title>
+    <title>GAMING HUB | FULL SETUP FIXED</title>
     <style>
         :root { --primary: #00d2ff; --bg: #0f172a; --glass: rgba(30, 41, 59, 0.7); --danger: #ef4444; --video: #ff0050; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: radial-gradient(circle at top right, #1e293b, #0f172a); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 420px; padding: 20px; text-align: center; }
         .glass-card { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 24px; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        
         .pass-container { position: relative; width: 100%; margin: 8px 0; }
-        input { width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 12px; outline: none; width: 100%; }
-        .eye-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; }
+        input { width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 12px; outline: none; margin: 5px 0; }
+        .eye-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; z-index: 10; }
+
         .btn { display: block; width: 100%; padding: 14px; margin-top: 10px; border: none; background: var(--primary); color: #000; cursor: pointer; font-weight: 700; border-radius: 12px; transition: 0.3s; text-decoration: none; }
-        .contact-btn { background: #25d366; color: white; margin-top: 15px; font-size: 0.85rem; padding: 10px 20px; border-radius: 10px; font-weight: bold; }
+        .contact-btn { background: #25d366; color: white; margin-top: 15px; font-size: 0.85rem; padding: 10px 20px; border-radius: 10px; font-weight: bold; display: inline-block; text-decoration: none; }
+        
         .tool-card { background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px; border-radius: 20px; display: flex; align-items: center; gap: 12px; text-align: left; }
         .tool-img { width: 60px; height: 60px; border-radius: 15px; object-fit: cover; background: #334155; }
+        
         .action-btns { display: flex; gap: 8px; margin-top: 5px; }
         .dl-link { color: #000; background: var(--primary); text-decoration: none; font-size: 0.7rem; padding: 7px 10px; border-radius: 6px; font-weight: bold; }
         .vid-link { color: #fff; border: 1px solid var(--video); text-decoration: none; font-size: 0.7rem; padding: 6px 9px; border-radius: 6px; }
+        
         .hidden { display: none !important; }
         #admin-btn { position: fixed; bottom: 20px; right: 20px; opacity: 0.3; cursor: pointer; font-size: 1.5rem; }
-        .admin-item { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 12px; margin-bottom: 10px; text-align: left; border-left: 4px solid var(--primary); }
+        .admin-item { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 12px; margin-bottom: 10px; text-align: left; border-left: 4px solid var(--primary); font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -32,56 +37,56 @@
     <div id="screen-login" class="container">
         <h1>Gaming Hub</h1>
         <div class="glass-card">
-            <input type="email" id="user-email" placeholder="Email">
+            <input type="email" id="user-email" placeholder="ای میل ایڈریس">
             <div class="pass-container">
-                <input type="password" id="user-pass" placeholder="Password">
+                <input type="password" id="user-pass" placeholder="پاس ورڈ">
                 <span class="eye-icon" onclick="togglePass()">👁️</span>
             </div>
-            <button class="btn" onclick="handleAuth()">Access Hub</button>
-            <a href="#" id="login-contact" class="btn contact-btn" target="_blank">WhatsApp Support</a>
+            <button class="btn" onclick="handleAuth()">لاگ ان کریں</button>
+            <a href="#" id="login-contact" class="contact-btn" target="_blank">واٹس ایپ سپورٹ</a>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h1>Clearance</h1>
+        <h1>تصدیق کریں</h1>
         <div class="glass-card">
-            <a href="#" id="s1_link" target="_blank" class="btn" onclick="markStep('s1')">Step 1: TikTok</a>
-            <a href="#" id="s2_link" target="_blank" class="btn" onclick="markStep('s2')">Step 2: YouTube</a>
-            <a href="#" id="s3_link" target="_blank" class="btn" onclick="markStep('s3')">Step 3: WhatsApp</a>
-            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">Start Decryption</button>
-            <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">Unlocking... <span id="sec">15</span>s</p>
+            <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep('s1')">مرحلہ 1: ٹک ٹاک</a>
+            <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep('s2')">مرحلہ 2: یوٹیوب</a>
+            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep('s3')">مرحلہ 3: واٹس ایپ</a>
+            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">ٹولز کھولیں</button>
+            <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">پروسیسنگ ہو رہی ہے: <span id="sec">15</span>s</p>
         </div>
     </div>
 
     <div id="screen-tools" class="container hidden">
-        <h1>Tools Hub</h1>
+        <h1 id="hub-title">ٹولز ہب</h1>
         <div id="tools-list" style="margin-top:20px;"></div>
-        <a href="#" id="tools-contact" class="btn contact-btn" style="width: 100%;" target="_blank">Contact Admin</a>
-        <button class="btn" style="background:none; border:1px solid var(--danger); color:var(--danger); margin-top:20px;" onclick="logout()">Logout</button>
+        <a href="#" id="tools-contact" class="contact-btn" style="width: 100%;" target="_blank">ایڈمن سے رابطہ کریں</a>
+        <button class="btn" style="background:none; color:var(--danger); border:1px solid var(--danger); margin-top:20px;" onclick="logout()">لاگ آؤٹ</button>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <h1>Admin Settings</h1>
+        <h1>ایڈمن پینل</h1>
         <div class="glass-card" style="text-align: left; max-height: 80vh; overflow-y: auto;">
-            <p style="color:var(--primary);">Add Tool:</p>
-            <input type="text" id="t_name" placeholder="Name">
-            <input type="text" id="t_url" placeholder="Download Link">
-            <input type="text" id="t_pic" placeholder="Icon Link">
-            <input type="text" id="t_vid" placeholder="Video Link">
-            <button class="btn" onclick="uploadTool()">Upload</button>
-            <hr style="margin:20px 0; opacity:0.1;">
+            <p style="color:var(--primary); font-weight:bold;">ٹول شامل کریں:</p>
+            <input type="text" id="t_name" placeholder="نام">
+            <input type="text" id="t_url" placeholder="ڈاؤن لوڈ لنک">
+            <input type="text" id="t_pic" placeholder="آئیکون لنک (URL)">
+            <input type="text" id="t_vid" placeholder="ویڈیو لنک (URL)">
+            <button class="btn" onclick="uploadTool()">اپ لوڈ کریں</button>
             
-            <p style="color:var(--primary);">Social Settings:</p>
-            <input type="text" id="set_tk" placeholder="TikTok URL">
-            <input type="text" id="set_yt" placeholder="YouTube URL">
-            <input type="text" id="set_wa" placeholder="WhatsApp Group">
-            <input type="text" id="set_phone" placeholder="Admin No (91...)">
-            <button class="btn" style="background:#fff;" onclick="updateSettings()">Save All</button>
             <hr style="margin:20px 0; opacity:0.1;">
+            <p style="color:var(--primary); font-weight:bold;">سوشل میڈیا سیٹنگز:</p>
+            <input type="text" id="set_tk" placeholder="ٹک ٹاک لنک">
+            <input type="text" id="set_yt" placeholder="یوٹیوب لنک">
+            <input type="text" id="set_wa" placeholder="واٹس ایپ گروپ لنک">
+            <input type="text" id="set_phone" placeholder="ایڈمن واٹس ایپ نمبر (91...)">
+            <button class="btn" style="background: #fff;" onclick="updateSettings()">سیٹنگز محفوظ کریں</button>
             
-            <p style="color:var(--primary);">Manage List:</p>
+            <hr style="margin:20px 0; opacity:0.1;">
+            <p style="color:var(--primary); font-weight:bold;">ٹولز لسٹ (ڈیلیٹ کریں):</p>
             <div id="admin-tools-list"></div>
-            <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">Back</button>
+            <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">واپس جائیں</button>
         </div>
     </div>
 
@@ -132,31 +137,36 @@
                 wa: document.getElementById('set_wa').value,
                 phone: document.getElementById('set_phone').value
             });
-            alert("Updated!"); loadSettings();
+            alert("سیٹنگز اپ ڈیٹ ہو گئیں!"); loadSettings();
         };
 
         window.handleAuth = async () => {
             const e = document.getElementById('user-email').value;
             const p = document.getElementById('user-pass').value;
-            try { await signInWithEmailAndPassword(auth, e, p); } catch(err) { await createUserWithEmailAndPassword(auth, e, p); }
+            if(!e || !p) return alert("Please fill details");
+            try { await signInWithEmailAndPassword(auth, e, p); } 
+            catch(err) { await createUserWithEmailAndPassword(auth, e, p); }
         };
 
         onAuthStateChanged(auth, (user) => {
-            if(user) { document.getElementById('admin-btn').classList.remove('hidden'); show('screen-verify'); loadSettings(); }
+            if(user) { 
+                document.getElementById('admin-btn').classList.remove('hidden'); 
+                show('screen-verify'); 
+                loadSettings(); 
+            } else {
+                show('screen-login');
+                document.getElementById('admin-btn').classList.add('hidden');
+            }
         });
 
-        // --- FIXED DELETE (STRICT) ---
         window.deleteTool = async (id) => {
-            if(confirm("Bhai, Delete kar doon?")) {
+            if(confirm("کیا آپ واقعی اسے ڈیلیٹ کرنا چاہتے ہیں؟")) {
                 try {
                     await deleteDoc(doc(db, "tools", id));
-                    alert("Deleted!");
-                    // No need to refresh, onSnapshot handles it!
+                    alert("ڈیلیٹ ہو گیا!");
                 } catch(e) { alert("Error: " + e.message); }
             }
         };
-
-        window.copyLink = (t) => { navigator.clipboard.writeText(t).then(()=>alert("Copied!")); };
 
         function loadTools() {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
@@ -166,13 +176,11 @@
                 snap.forEach(d => {
                     const data = d.data();
                     list.innerHTML += `<div class="tool-card">
-                        <img src="${data.pic}" class="tool-img">
-                        <div><b>${data.name}</b><div class="action-btns"><a href="${data.url}" class="dl-link" target="_blank">DOWNLOAD</a>${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">VIDEO</a>`:''}</div></div>
+                        <img src="${data.pic || 'https://via.placeholder.com/60'}" class="tool-img">
+                        <div><b>${data.name}</b><div class="action-btns"><a href="${data.url}" class="dl-link" target="_blank">ڈاؤن لوڈ</a>${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">ویڈیو</a>`:''}</div></div>
                     </div>`;
-                    const share = `${window.location.origin}${window.location.pathname}?tool=${d.id}`;
                     adminList.innerHTML += `<div class="admin-item">
-                        <b>${data.name}</b><br>
-                        <button onclick="copyLink('${share}')" style="font-size:10px;">COPY LINK</button>
+                        <b>${data.name}</b>
                         <button onclick="deleteTool('${d.id}')" style="color:red; float:right; border:none; background:none; cursor:pointer; font-weight:bold;">DELETE</button>
                     </div>`;
                 });
@@ -186,14 +194,14 @@
             const vid = document.getElementById('t_vid').value;
             if(name && url) {
                 await addDoc(collection(db, "tools"), { name, url, pic, vid, time: Date.now() });
-                alert("Success!");
+                alert("کامیابی سے اپ لوڈ ہو گیا!");
                 document.getElementById('t_name').value=""; document.getElementById('t_url').value="";
             }
         };
 
         window.markStep = (id) => { document.getElementById(id+'_link').style.background="var(--primary)"; window.steps = (window.steps || 0) + 1; if(window.steps >=3) document.getElementById('unlock-btn').classList.remove('hidden'); };
         window.startTimer = () => { document.getElementById('timer-box').classList.remove('hidden'); let t=15; let itv = setInterval(()=>{ if(t>0){ t--; document.getElementById('sec').innerText=t; }else{ clearInterval(itv); show('screen-tools'); loadTools(); } },1000); };
-        window.askAdminPass = () => { if(prompt("PIN:") === "killer786") { show('screen-admin'); loadTools(); loadSettings(); } };
+        window.askAdminPass = () => { if(prompt("پن کوڈ درج کریں:") === "killer786") { show('screen-admin'); loadTools(); loadSettings(); } };
         window.logout = () => signOut(auth).then(() => location.reload());
         function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
     </script>
