@@ -3,75 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | ULTIMATE V2</title>
+    <title>GAMING HUB | FULL VERSION</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --primary: #00f2ff; 
-            --secondary: #7000ff;
-            --bg: #050b18; 
-            --glass: rgba(15, 23, 42, 0.8); 
-            --danger: #ff4757; 
-            --success: #2ed573;
-        }
+        :root { --primary: #00f2ff; --secondary: #7000ff; --bg: #050b18; --glass: rgba(15, 23, 42, 0.8); --danger: #ff4757; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
-        body { 
-            background: radial-gradient(circle at center, #1a1a2e 0%, #050b18 100%); 
-            color: #f8fafc; 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow-x: hidden; 
-        }
-
-        h1 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-        .container { width: 100%; max-width: 450px; padding: 20px; text-align: center; transition: 0.5s; }
-        .glass-card { 
-            background: var(--glass); 
-            border: 1px solid rgba(0, 242, 255, 0.2); 
-            padding: 30px; 
-            border-radius: 30px; 
-            backdrop-filter: blur(25px); 
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); 
-        }
-
-        input { 
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.4); 
-            border: 1px solid rgba(255,255,255,0.1); color: #fff; 
-            border-radius: 15px; outline: none; margin: 10px 0; 
-            transition: 0.3s;
-        }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 10px var(--primary); }
-
-        .btn { 
-            display: block; width: 100%; padding: 15px; margin-top: 15px; border: none; 
-            background: linear-gradient(90deg, var(--primary), var(--secondary)); 
-            color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; 
-            transition: 0.3s; text-decoration: none; text-transform: uppercase;
-        }
-        .btn:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary); }
-
-        /* Social Buttons */
+        body { background: radial-gradient(circle at center, #1a1a2e 0%, #050b18 100%); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
+        .container { width: 100%; max-width: 450px; padding: 20px; text-align: center; }
+        .glass-card { background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); padding: 30px; border-radius: 30px; backdrop-filter: blur(25px); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
+        input { width: 100%; padding: 15px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 15px; outline: none; margin: 10px 0; }
+        .btn { display: block; width: 100%; padding: 15px; margin-top: 15px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; transition: 0.3s; text-decoration: none; text-transform: uppercase; }
         .social-auth { display: flex; gap: 10px; margin-top: 20px; }
-        .social-btn { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; background: rgba(255,255,255,0.05); color: white; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.9rem; }
-        .social-btn:hover { background: rgba(255,255,255,0.15); }
-
-        .tool-card { 
-            background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid rgba(255,255,255,0.1); 
-            margin-bottom: 15px; border-radius: 20px; display: flex; align-items: center; gap: 15px; text-align: left;
-            transition: 0.3s;
-        }
-        .tool-card:hover { background: rgba(255,255,255,0.08); border-color: var(--primary); }
+        .social-btn { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; background: rgba(255,255,255,0.05); color: white; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tool-card { background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; border-radius: 20px; display: flex; align-items: center; gap: 15px; text-align: left; }
         .tool-img { width: 65px; height: 65px; border-radius: 15px; object-fit: cover; border: 2px solid var(--primary); }
-
+        .action-btns { display: flex; gap: 8px; margin-top: 8px; }
+        .dl-link { background: var(--primary); color: #000; padding: 5px 12px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 0.8rem; }
+        .vid-link { border: 1px solid #ff0050; color: #fff; padding: 4px 11px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; }
         .hidden { display: none !important; }
-        #admin-btn { position: fixed; bottom: 20px; right: 20px; font-size: 2rem; cursor: pointer; opacity: 0.5; transition: 0.3s; }
-        #admin-btn:hover { opacity: 1; filter: drop-shadow(0 0 5px var(--primary)); }
-        
-        .timer-text { font-size: 1.2rem; color: gold; font-weight: bold; margin-top: 15px; }
+        #admin-btn { position: fixed; bottom: 20px; right: 20px; font-size: 2rem; cursor: pointer; opacity: 0.4; }
     </style>
 </head>
 <body>
@@ -79,50 +29,57 @@
     <div id="admin-btn" class="hidden" onclick="askAdminPass()">⚙️</div>
 
     <div id="screen-login" class="container">
-        <h1>Gaming Hub</h1>
+        <h1 style="font-family:'Orbitron'; color:var(--primary);">Gaming Hub</h1>
         <div class="glass-card">
-            <input type="email" id="user-email" placeholder="ای میل ایڈریس">
+            <input type="email" id="user-email" placeholder="ای میل">
             <input type="password" id="user-pass" placeholder="پاس ورڈ">
             <button class="btn" onclick="handleAuth()">لاگ ان / سائن اپ</button>
-            
-            <div style="margin: 20px 0; opacity: 0.5;">یا ان کے ذریعے جڑیں</div>
-            
             <div class="social-auth">
                 <button class="social-btn" onclick="loginSocial('google')">Google</button>
                 <button class="social-btn" onclick="loginSocial('github')">GitHub</button>
             </div>
-            <a href="#" id="login-contact" class="social-btn" style="margin-top:20px; background:#25d366; border:none;" target="_blank">واٹس ایپ سپورٹ</a>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h1>Verify Steps</h1>
+        <h1>Verification</h1>
         <div class="glass-card">
             <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep('s1')">Step 1: TikTok</a>
             <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep('s2')">Step 2: YouTube</a>
-            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep('s3')">Step 3: Join Group</a>
-            
-            <button id="unlock-btn" class="btn hidden" style="background:linear-gradient(90deg, #ffd700, #ffa500);" onclick="startTimer()">Unlock Tools 🔓</button>
-            <div id="timer-box" class="hidden timer-text">برائے مہربانی انتظار کریں: <span id="sec">15</span>s</div>
+            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep('s3')">Step 3: WhatsApp</a>
+            <button id="unlock-btn" class="btn hidden" style="background:gold;" onclick="startTimer()">Unlock Tools</button>
+            <p id="timer-box" class="hidden" style="margin-top:15px; color:gold;">Processing: <span id="sec">15</span>s</p>
         </div>
     </div>
 
     <div id="screen-tools" class="container hidden">
         <h1>Tools Hub</h1>
-        <div id="tools-list" style="margin-top:20px;"></div>
-        <button class="btn" style="background:var(--danger); color:white; margin-top:30px;" onclick="logout()">لاگ آؤٹ کریں</button>
+        <div id="tools-list"></div>
+        <button class="btn" style="background:var(--danger); color:white;" onclick="logout()">Logout</button>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <h1>Admin Control</h1>
-        <div class="glass-card" style="text-align: left; max-height: 80vh; overflow-y: auto;">
-            <input type="text" id="t_name" placeholder="ٹول کا نام">
-            <input type="text" id="t_url" placeholder="ڈاؤن لوڈ لنک">
-            <input type="text" id="t_pic" placeholder="آئیکون URL">
-            <button class="btn" onclick="uploadTool()">ایڈ کریں</button>
+        <h1>Admin Panel</h1>
+        <div class="glass-card" style="text-align: left; max-height: 85vh; overflow-y: auto;">
+            <p style="color:var(--primary); font-weight:bold;">Add Tool:</p>
+            <input type="text" id="t_name" placeholder="Tool Name">
+            <input type="text" id="t_url" placeholder="Download URL">
+            <input type="text" id="t_pic" placeholder="Icon URL">
+            <input type="text" id="t_vid" placeholder="Video URL (Optional)">
+            <button class="btn" onclick="uploadTool()">Upload Now</button>
+            
             <hr style="margin:20px 0; opacity:0.1;">
+            <p style="color:var(--primary); font-weight:bold;">Social Links & Settings:</p>
+            <input type="text" id="set_tk" placeholder="TikTok Link">
+            <input type="text" id="set_yt" placeholder="YouTube Link">
+            <input type="text" id="set_wa" placeholder="WhatsApp Group">
+            <input type="text" id="set_phone" placeholder="Admin WA (923...)">
+            <button class="btn" style="background:#fff;" onclick="updateSettings()">Save All Settings</button>
+            
+            <hr style="margin:20px 0; opacity:0.1;">
+            <p style="color:var(--primary); font-weight:bold;">Manage Tools:</p>
             <div id="admin-tools-list"></div>
-            <button class="btn" style="background:#334155; color:white;" onclick="show('screen-tools')">واپس</button>
+            <button class="btn" style="background:#334155; color:#fff;" onclick="show('screen-tools')">Back</button>
         </div>
     </div>
 
@@ -131,7 +88,6 @@
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyC9THzTxB73m4OpeNE2tkmafvpExIGWlvg",
             authDomain: "gaming-d9494.firebaseapp.com",
@@ -145,44 +101,92 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Social Login Logic
-        window.loginSocial = async (providerName) => {
-            const provider = providerName === 'google' ? new GoogleAuthProvider() : new GithubAuthProvider();
-            try {
-                await signInWithPopup(auth, provider);
-            } catch (err) {
-                alert("Login Error: " + err.message);
-            }
+        // --- AUTH LOGIC ---
+        window.loginSocial = async (p) => {
+            const provider = p === 'google' ? new GoogleAuthProvider() : new GithubAuthProvider();
+            try { await signInWithPopup(auth, provider); } catch(e) { alert(e.message); }
         };
 
-        // Email Auth
         window.handleAuth = async () => {
             const e = document.getElementById('user-email').value;
             const p = document.getElementById('user-pass').value;
-            if(!e || !p) return alert("Email/Password missing");
             try { await signInWithEmailAndPassword(auth, e, p); } 
-            catch(err) { await createUserWithEmailAndPassword(auth, e, p); }
+            catch { await createUserWithEmailAndPassword(auth, e, p); }
         };
 
-        // Auth State
         onAuthStateChanged(auth, (user) => {
             if(user) { 
                 document.getElementById('admin-btn').classList.remove('hidden'); 
-                show('screen-verify');
-                loadTools();
-            } else {
-                show('screen-login');
-                document.getElementById('admin-btn').classList.add('hidden');
-            }
+                show('screen-verify'); loadConfig(); loadTools();
+            } else { show('screen-login'); }
         });
 
-        // Steps Logic
-        let completedSteps = 0;
-        window.markStep = (id) => {
-            document.getElementById(id+'_link').style.opacity = "0.5";
-            document.getElementById(id+'_link').innerText = "✅ Completed";
-            completedSteps++;
-            if(completedSteps >= 3) document.getElementById('unlock-btn').classList.remove('hidden');
+        // --- SETTINGS LOGIC ---
+        async function loadConfig() {
+            const snap = await getDoc(doc(db, "config", "main"));
+            if(snap.exists()){
+                const d = snap.data();
+                document.getElementById('s1_link').href = d.tk;
+                document.getElementById('s2_link').href = d.yt;
+                document.getElementById('s3_link').href = d.wa;
+                document.getElementById('set_tk').value = d.tk || "";
+                document.getElementById('set_yt').value = d.yt || "";
+                document.getElementById('set_wa').value = d.wa || "";
+                document.getElementById('set_phone').value = d.phone || "";
+            }
+        }
+
+        window.updateSettings = async () => {
+            await setDoc(doc(db, "config", "main"), {
+                tk: document.getElementById('set_tk').value,
+                yt: document.getElementById('set_yt').value,
+                wa: document.getElementById('set_wa').value,
+                phone: document.getElementById('set_phone').value
+            });
+            alert("Settings Updated!"); loadConfig();
+        };
+
+        // --- TOOLS LOGIC ---
+        window.uploadTool = async () => {
+            const name = document.getElementById('t_name').value;
+            const url = document.getElementById('t_url').value;
+            const pic = document.getElementById('t_pic').value;
+            const vid = document.getElementById('t_vid').value;
+            if(name && url) {
+                await addDoc(collection(db, "tools"), { name, url, pic, vid, time: Date.now() });
+                alert("Tool Added!");
+            }
+        };
+
+        function loadTools() {
+            onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
+                const list = document.getElementById('tools-list');
+                const adminList = document.getElementById('admin-tools-list');
+                list.innerHTML = ""; adminList.innerHTML = "";
+                snap.forEach(d => {
+                    const data = d.data();
+                    list.innerHTML += `<div class="tool-card">
+                        <img src="${data.pic || 'https://via.placeholder.com/60'}" class="tool-img">
+                        <div>
+                            <b>${data.name}</b>
+                            <div class="action-btns">
+                                <a href="${data.url}" class="dl-link" target="_blank">Download</a>
+                                ${data.vid ? `<a href="${data.vid}" class="vid-link" target="_blank">Video</a>` : ''}
+                            </div>
+                        </div>
+                    </div>`;
+                    adminList.innerHTML += `<div style="margin-bottom:8px; border-bottom:1px solid #333; padding:5px;">${data.name} <button onclick="deleteTool('${d.id}')" style="color:red; float:right;">DELETE</button></div>`;
+                });
+            });
+        }
+
+        window.deleteTool = async (id) => { if(confirm("Delete?")) await deleteDoc(doc(db, "tools", id)); };
+
+        // --- NAVIGATION ---
+        let steps = 0;
+        window.markStep = (id) => { 
+            document.getElementById(id+'_link').style.background = "var(--primary)";
+            steps++; if(steps >= 3) document.getElementById('unlock-btn').classList.remove('hidden');
         };
 
         window.startTimer = () => {
@@ -194,37 +198,10 @@
             }, 1000);
         };
 
-        // Tools Display
-        function loadTools() {
-            onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (snap) => {
-                const list = document.getElementById('tools-list');
-                const adminList = document.getElementById('admin-tools-list');
-                list.innerHTML = ""; adminList.innerHTML = "";
-                snap.forEach(d => {
-                    const data = d.data();
-                    list.innerHTML += `<div class="tool-card">
-                        <img src="${data.pic || 'https://via.placeholder.com/60'}" class="tool-img">
-                        <div><b>${data.name}</b><br><a href="${data.url}" target="_blank" style="color:var(--primary); font-size:0.8rem;">Download Tool</a></div>
-                    </div>`;
-                    adminList.innerHTML += `<div style="padding:10px; border-bottom:1px solid #333;">${data.name} <button onclick="deleteTool('${d.id}')" style="color:red; float:right;">X</button></div>`;
-                });
-            });
-        }
-
-        window.uploadTool = async () => {
-            const name = document.getElementById('t_name').value;
-            const url = document.getElementById('t_url').value;
-            const pic = document.getElementById('t_pic').value;
-            if(name && url) {
-                await addDoc(collection(db, "tools"), { name, url, pic, time: Date.now() });
-                alert("Tool Added!");
-            }
-        };
-
-        window.deleteTool = async (id) => { if(confirm("Delete?")) await deleteDoc(doc(db, "tools", id)); };
         window.askAdminPass = () => { if(prompt("Admin Pin:") === "killer786") show('screen-admin'); };
         window.logout = () => signOut(auth).then(() => location.reload());
         function show(id) { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
     </script>
 </body>
 </html>
+
