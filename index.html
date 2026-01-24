@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | FULL SECURE VERSION</title>
+    <title>GAMING HUB | FINAL SECURE VERSION</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00f2ff; --secondary: #7000ff; --bg: #050b18; --glass: rgba(15, 23, 42, 0.9); --danger: #ff4757; --success: #2ed573; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: radial-gradient(circle at center, #1a1a2e 0%, #050b18 100%); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
         
-        /* Floating WhatsApp */
+        /* Layout & UI */
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
-        
-        /* Profile Menu */
         .user-menu-container { position: fixed; top: 15px; left: 15px; z-index: 2000; }
         .profile-trigger { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); cursor: pointer; overflow: hidden; background: var(--glass); }
         .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
@@ -23,16 +21,20 @@
 
         .container { width: 100%; max-width: 450px; padding: 20px; text-align: center; }
         .glass-card { background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); padding: 25px; border-radius: 30px; backdrop-filter: blur(25px); margin-bottom: 20px; }
-        input { width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; outline: none; margin: 8px 0; }
+        
+        /* Inputs & Buttons */
+        .input-group { position: relative; margin: 8px 0; }
+        input { width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; outline: none; }
+        .eye-icon { position: absolute; right: 15px; top: 14px; cursor: pointer; color: var(--primary); }
         
         .btn { display: block; width: 100%; padding: 15px; margin-top: 10px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; transition: 0.3s; text-transform: uppercase; text-align: center; text-decoration: none; }
         .btn-small { padding: 8px 12px; font-size: 11px; margin-top: 5px; border-radius: 8px; display: inline-block; text-decoration: none; font-weight: bold; border: none; cursor: pointer; color: #fff; }
         
+        /* Tool Cards */
         .tool-card { background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 12px; border-radius: 18px; display: flex; align-items: center; gap: 15px; text-align: left; }
         .tool-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 2px solid var(--primary); }
         .tool-info { flex: 1; }
         
-        .admin-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 8px; font-size: 0.8rem; }
         .hidden { display: none !important; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -56,39 +58,33 @@
     <div id="screen-login" class="container">
         <h1 style="font-family:'Orbitron'; color:var(--primary);">GAMING HUB</h1>
         <div class="glass-card">
-            <input type="email" id="user-email" placeholder="Enter Email">
-            <button class="btn" onclick="sendAuthLink()">Get Login Magic Link</button>
-            <hr style="margin:20px 0; opacity:0.1;">
-            <div style="display:flex; gap:10px;">
-                <button class="btn" style="background:#fff; color:#000; flex:1;" onclick="loginSocial('google')">Google</button>
-                <button class="btn" style="background:#24292e; color:#fff; flex:1;" onclick="loginSocial('github')">GitHub</button>
-            </div>
+            <button class="btn" style="background:#fff; color:#000;" onclick="loginSocial()">Login with Google</button>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h2>Verification</h2>
+        <h2>Verification Required</h2>
         <div class="glass-card">
-            <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep()">TikTok</a>
-            <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep()">YouTube</a>
-            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep()">WhatsApp</a>
+            <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep()">Follow TikTok</a>
+            <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep()">Subscribe YouTube</a>
+            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep()">Join WhatsApp</a>
             <button id="unlock-btn" class="btn hidden" style="background:var(--success); color:#fff;" onclick="startTimer()">Unlock Tools</button>
-            <div id="timer-box" class="hidden" style="color:gold; margin-top:10px;">Processing: <span id="sec">15</span>s</div>
+            <div id="timer-box" class="hidden" style="color:gold; margin-top:10px;">Checking: <span id="sec">15</span>s</div>
         </div>
     </div>
 
     <div id="screen-content" class="container hidden">
-        <h2 id="view-title">TOOLS</h2>
+        <h2 id="view-title">DASHBOARD</h2>
         <div id="tab-tools-view">
             <input type="text" id="tool-search" placeholder="🔍 Search Tools..." onkeyup="filterTools()">
-            <div id="tools-list"></div>
+            <div id="tools-list" style="margin-top:20px;"></div>
         </div>
         <div id="tab-profile-view" class="hidden">
             <div class="glass-card">
                 <img id="profile-pic" src="" style="width:80px; border-radius:50%; border:2px solid var(--primary);"><br><br>
                 <h3 id="profile-name-view"></h3>
                 <input type="text" id="edit-name" placeholder="Change Name">
-                <button class="btn" onclick="updateProfile()">Save Name</button>
+                <button class="btn" onclick="updateProfile()">Update Name</button>
             </div>
         </div>
     </div>
@@ -96,130 +92,172 @@
     <div id="screen-admin" class="container hidden">
         <div class="glass-card" style="text-align:left; max-height:85vh; overflow-y:auto;">
             <h3 style="color:var(--primary); text-align:center;">ADMIN DASHBOARD</h3>
+            <hr style="margin:15px 0; opacity:0.1;">
             
-            <p style="margin-top:15px; font-weight:bold; color:var(--primary);">Admin Settings</p>
-            <input type="email" id="new-admin-email" placeholder="Change Admin Email">
-            <button class="btn" style="background:var(--success); color:#000;" onclick="saveAdminEmail()">Save Admin Email</button>
-
-            <hr style="margin:20px 0; opacity:0.1;">
-            
-            <p style="font-weight:bold; color:var(--primary);">Manage Tools</p>
+            <p style="font-weight:bold; color:var(--primary);">Tool Info</p>
             <input type="text" id="t_name" placeholder="Tool Name">
             <input type="text" id="t_url" placeholder="Download URL">
-            <input type="text" id="t_game" placeholder="Target Game Link">
-            <input type="text" id="t_video" placeholder="Video Tutorial Link">
-            <input type="text" id="t_pic" placeholder="Icon Image Link">
-            <button class="btn" onclick="addToolAdvanced()">Add Tool</button>
-
-            <p style="margin-top:20px; font-weight:bold;">User Management</p>
-            <div id="admin-users-list"></div>
+            <input type="text" id="t_video" placeholder="Video Tutorial URL">
+            <input type="text" id="t_apple" placeholder="Apple/Game URL">
+            <input type="text" id="t_pic" placeholder="Icon Link">
             
-            <button class="btn" style="background:#444; color:#fff;" onclick="location.reload()">Back</button>
+            <p style="font-weight:bold; color:var(--primary); margin-top:10px;">Security Check (Eye Button Demo)</p>
+            <div class="input-group">
+                <input type="password" id="admin-pass-demo" placeholder="Example Password Field">
+                <span class="eye-icon" onclick="togglePass('admin-pass-demo')">👁️</span>
+            </div>
+
+            <button class="btn" onclick="addTool()">Add New Tool</button>
+            <button class="btn" style="background:#444; color:#fff;" onclick="show('screen-content')">Back</button>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // Your Config
         const firebaseConfig = {
-            apiKey: "AIzaSyC9THzTxB73m4OpeNE2tkmafvpExIGWlvg",
-            authDomain: "gaming-d9494.firebaseapp.com",
-            projectId: "gaming-d9494",
-            storageBucket: "gaming-d9494.firebasestorage.app",
-            messagingSenderId: "464029519961",
-            appId: "1:464029519961:web:18db325072160f4c48a148"
+          apiKey: "AIzaSyA8eAIxj8kLzf1DuESe48rNF3_hR7_oorc",
+          authDomain: "games-451a2.firebaseapp.com",
+          projectId: "games-451a2",
+          storageBucket: "games-451a2.firebasestorage.app",
+          messagingSenderId: "825960346996",
+          appId: "1:825960346996:web:8154949791d664e1ab2821"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let CURRENT_ADMIN = "Saabj5614@gmail.com";
-        let stepsCount = 0; let allTools = [];
+        const ADMIN_EMAIL = "Saabj5614@gmail.com";
+        let stepsCount = 0;
+        let allTools = [];
 
         onAuthStateChanged(auth, async (user) => {
             if(user) {
-                const configSnap = await getDoc(doc(db, "config", "admin_settings"));
-                if(configSnap.exists()) CURRENT_ADMIN = configSnap.data().email;
-
                 const userRef = doc(db, "users", user.uid);
                 let snap = await getDoc(userRef);
                 if(!snap.exists()) {
-                    await setDoc(userRef, { name: user.displayName || "Gamer", email: user.email, photo: user.photoURL || "", isVerified: false, isBlocked: false });
+                    await setDoc(userRef, { name: user.displayName, email: user.email, photo: user.photoURL, isVerified: false });
                 }
                 const ud = (await getDoc(userRef)).data();
-                if(ud.isBlocked) { alert("You are blocked!"); return; }
-
+                
                 document.getElementById('top-profile-pic').src = ud.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 document.getElementById('profile-pic').src = ud.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 document.getElementById('profile-name-view').innerText = ud.name;
                 document.getElementById('user-menu').classList.remove('hidden');
 
-                if(user.email.toLowerCase() === CURRENT_ADMIN.toLowerCase()) {
+                if(user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     document.getElementById('admin-entry-btn').classList.remove('hidden');
-                    document.getElementById('new-admin-email').value = CURRENT_ADMIN;
-                    loadAdminData();
                 }
 
                 if(ud.isVerified) { show('screen-content'); loadTools(); }
                 else { show('screen-verify'); loadVerifyLinks(); }
-                loadGlobalSettings();
-            } else { show('screen-login'); }
+                loadGlobalConfig();
+            } else {
+                show('screen-login');
+                document.getElementById('user-menu').classList.add('hidden');
+            }
         });
 
-        window.saveAdminEmail = async () => {
-            const m = document.getElementById('new-admin-email').value;
-            if(m) { await setDoc(doc(db, "config", "admin_settings"), { email: m }); alert("Admin Email Updated!"); location.reload(); }
+        // Core Functions
+        window.loginSocial = () => signInWithPopup(auth, new GoogleAuthProvider());
+        window.logout = () => signOut(auth).then(() => location.reload());
+        window.show = (id) => { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
+        window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
+        window.togglePass = (id) => { const el = document.getElementById(id); el.type = el.type === 'password' ? 'text' : 'password'; };
+        
+        window.tab = (t) => {
+            show('screen-content');
+            document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools');
+            document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile');
+            document.getElementById('profile-dropdown').classList.remove('active');
         };
 
-        window.addToolAdvanced = async () => {
+        window.markStep = () => { stepsCount++; if(stepsCount >= 3) document.getElementById('unlock-btn').classList.remove('hidden'); };
+        
+        window.startTimer = () => {
+            document.getElementById('timer-box').classList.remove('hidden');
+            let t = 15;
+            let itv = setInterval(async () => {
+                t--; document.getElementById('sec').innerText = t;
+                if(t <= 0) {
+                    clearInterval(itv);
+                    await updateDoc(doc(db, "users", auth.currentUser.uid), { isVerified: true });
+                    location.reload();
+                }
+            }, 1000);
+        };
+
+        window.updateProfile = async () => {
+            const name = document.getElementById('edit-name').value;
+            if(name) { await updateDoc(doc(db, "users", auth.currentUser.uid), { name }); alert("Success!"); location.reload(); }
+        };
+
+        // Admin: Add Tool
+        window.addTool = async () => {
             const name = document.getElementById('t_name').value;
             const url = document.getElementById('t_url').value;
-            const game = document.getElementById('t_game').value;
             const video = document.getElementById('t_video').value;
+            const apple = document.getElementById('t_apple').value;
             const pic = document.getElementById('t_pic').value;
-            if(!name || !url || !pic) return alert("Fill Name, URL and Icon!");
-            await addDoc(collection(db, "tools"), { name, url, game: game||"#", video: video||"#", pic, time: Date.now() });
-            alert("Tool Added!"); location.reload();
+            if(name && url && pic) {
+                await addDoc(collection(db, "tools"), { name, url, video: video||"", apple: apple||"", pic, time: Date.now() });
+                alert("Tool Added!"); location.reload();
+            }
         };
 
+        // Load Data
         window.loadTools = () => {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (s) => {
-                allTools = s.docs.map(d => ({id: d.id, ...d.data()}));
+                allTools = s.docs.map(d => d.data());
                 renderTools(allTools);
             });
         };
 
         function renderTools(ts) {
-            const list = document.getElementById('tools-list'); list.innerHTML = "";
+            const list = document.getElementById('tools-list');
+            list.innerHTML = "";
             ts.forEach(t => {
-                list.innerHTML += `<div class="tool-card">
+                list.innerHTML += `
+                <div class="tool-card">
                     <img src="${t.pic}" class="tool-img">
                     <div class="tool-info">
-                        <b>${t.name}</b><br>
-                        <a href="${t.url}" target="_blank" class="btn-small" style="background:var(--primary); color:#000;">Download</a>
-                        <a href="${t.game}" target="_blank" class="btn-small" style="background:var(--secondary);">Game</a>
-                        <a href="${t.video}" target="_blank" class="btn-small" style="background:var(--danger);">Video</a>
+                        <b style="color:var(--primary)">${t.name}</b>
+                        <div style="display:flex; gap:5px; margin-top:8px;">
+                            <a href="${t.url}" target="_blank" class="btn-small" style="background:var(--success); color:#000;">Download</a>
+                            ${t.video ? `<a href="${t.video}" target="_blank" class="btn-small" style="background:var(--danger);">Video</a>` : ''}
+                            ${t.apple ? `<a href="${t.apple}" target="_blank" class="btn-small" style="background:var(--secondary);">Apple</a>` : ''}
+                        </div>
                     </div>
                 </div>`;
             });
         }
 
-        window.loginSocial = (p) => { const prov = p === 'google' ? new GoogleAuthProvider() : new GithubAuthProvider(); signInWithPopup(auth, prov); };
-        window.logout = () => signOut(auth).then(() => location.reload());
-        window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
-        window.show = (id) => { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
-        window.tab = (t) => { show('screen-content'); document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools'); document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile'); };
-        window.markStep = () => { stepsCount++; if(stepsCount >= 3) document.getElementById('unlock-btn').classList.remove('hidden'); };
-        window.startTimer = () => { document.getElementById('timer-box').classList.remove('hidden'); let t = 15; let itv = setInterval(async () => { t--; document.getElementById('sec').innerText = t; if(t <= 0) { clearInterval(itv); await updateDoc(doc(db, "users", auth.currentUser.uid), { isVerified: true }); location.reload(); } }, 1000); };
-        
-        async function loadGlobalSettings() { const snap = await getDoc(doc(db, "config", "main")); if(snap.exists()) { const d = snap.data(); document.getElementById('wa-floating-btn').href = `https://wa.me/${d.wa_num}`; document.getElementById('wa-floating-btn').classList.remove('hidden'); } }
-        async function loadVerifyLinks() { const snap = await getDoc(doc(db, "config", "main")); if(snap.exists()) { const d = snap.data(); document.getElementById('s1_link').href = d.tk || "#"; document.getElementById('s2_link').href = d.yt || "#"; document.getElementById('s3_link').href = d.wa || "#"; } }
-        window.loadAdminData = () => { onSnapshot(collection(db, "users"), (s) => { const l = document.getElementById('admin-users-list'); l.innerHTML = ""; s.forEach(d => { const u = d.data(); l.innerHTML += `<div class="admin-item"><span>${u.email}</span><button onclick="toggleBlock('${d.id}', ${u.isBlocked})">${u.isBlocked ? 'UNBLOCK' : 'BLOCK'}</button></div>`; }); }); };
-        window.toggleBlock = async (uid, s) => { await updateDoc(doc(db, "users", uid), { isBlocked: !s }); };
-        window.filterTools = () => { const term = document.getElementById('tool-search').value.toLowerCase(); renderTools(allTools.filter(x => x.name.toLowerCase().includes(term))); };
+        async function loadGlobalConfig() {
+            const snap = await getDoc(doc(db, "config", "main"));
+            if(snap.exists()) {
+                document.getElementById('wa-floating-btn').href = `https://wa.me/${snap.data().wa_num}`;
+                document.getElementById('wa-floating-btn').classList.remove('hidden');
+            }
+        }
+
+        async function loadVerifyLinks() {
+            const snap = await getDoc(doc(db, "config", "main"));
+            if(snap.exists()) {
+                const d = snap.data();
+                document.getElementById('s1_link').href = d.tk || "#";
+                document.getElementById('s2_link').href = d.yt || "#";
+                document.getElementById('s3_link').href = d.wa || "#";
+            }
+        }
+
+        window.filterTools = () => {
+            const q = document.getElementById('tool-search').value.toLowerCase();
+            renderTools(allTools.filter(t => t.name.toLowerCase().includes(q)));
+        };
     </script>
 </body>
 </html>
