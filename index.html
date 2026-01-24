@@ -3,73 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | FINAL SECURE VERSION</title>
+    <title>GAMING HUB | SECURE ADMIN</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00f2ff; --secondary: #7000ff; --bg: #050b18; --glass: rgba(15, 23, 42, 0.9); --danger: #ff4757; --success: #2ed573; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: radial-gradient(circle at center, #1a1a2e 0%, #050b18 100%); color: #f8fafc; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
         
-        /* Layout & UI */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .user-menu-container { position: fixed; top: 15px; left: 15px; z-index: 2000; }
         .profile-trigger { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); cursor: pointer; overflow: hidden; background: var(--glass); }
         .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
         .dropdown-menu { position: absolute; top: 60px; left: 0; background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 20px; width: 220px; display: none; backdrop-filter: blur(20px); padding: 12px; animation: slideDown 0.3s ease; }
         .dropdown-menu.active { display: block; }
-        .dropdown-menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; color: white; background: none; border: none; cursor: pointer; font-size: 14px; border-radius: 10px; transition: 0.2s; text-align: left;}
+        .dropdown-menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; color: white; background: none; border: none; cursor: pointer; font-size: 14px; border-radius: 10px; transition: 0.2s; }
 
         .container { width: 100%; max-width: 450px; padding: 20px; text-align: center; }
         .glass-card { background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.2); padding: 25px; border-radius: 30px; backdrop-filter: blur(25px); margin-bottom: 20px; }
         
-        /* Inputs & Buttons */
-        .input-group { position: relative; margin: 8px 0; }
-        input { width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; outline: none; }
-        .eye-icon { position: absolute; right: 15px; top: 14px; cursor: pointer; color: var(--primary); }
+        input { width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 12px; outline: none; margin-bottom: 10px; }
         
-        .btn { display: block; width: 100%; padding: 15px; margin-top: 10px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; transition: 0.3s; text-transform: uppercase; text-align: center; text-decoration: none; }
-        .btn-small { padding: 8px 12px; font-size: 11px; margin-top: 5px; border-radius: 8px; display: inline-block; text-decoration: none; font-weight: bold; border: none; cursor: pointer; color: #fff; }
+        .btn { display: block; width: 100%; padding: 15px; margin-top: 10px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #000; cursor: pointer; font-weight: 800; border-radius: 15px; transition: 0.3s; text-transform: uppercase; text-decoration: none; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; color: #000; margin-bottom: 10px; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 14px; }
         
-        /* Tool Cards */
         .tool-card { background: rgba(255, 255, 255, 0.03); padding: 15px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 12px; border-radius: 18px; display: flex; align-items: center; gap: 15px; text-align: left; }
-        .tool-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 2px solid var(--primary); }
-        .tool-info { flex: 1; }
+        .tool-img { width: 65px; height: 65px; border-radius: 12px; object-fit: cover; border: 2px solid var(--primary); }
+        .btn-small { padding: 6px 12px; font-size: 11px; border-radius: 6px; text-decoration: none; color: #fff; display: inline-block; font-weight: bold; margin-right: 5px; }
         
         .hidden { display: none !important; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* User List Style */
+        .user-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 5px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <a href="#" id="wa-floating-btn" class="whatsapp-float hidden" target="_blank">
-        <svg style="width:35px;height:35px" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.5 2 2 6.5 2 12.04C2 13.81 2.46 15.54 3.33 17.04L2 22L7.13 20.69C8.57 21.47 10.2 21.89 11.9 21.89H12.04C17.57 21.89 22.07 17.4 22.07 11.86C22.07 9.18 21.03 6.67 19.13 4.77C17.23 2.87 14.72 2.03 12.04 2M12.05 3.67C14.28 3.67 16.37 4.54 17.95 6.11C19.53 7.69 20.4 9.77 20.4 12C20.4 16.47 16.71 20.13 12.24 20.13H12.13C10.68 20.13 9.27 19.78 8.03 19.1L7.74 18.94L4.72 19.71L5.5 16.78L5.32 16.5C4.58 15.3 4.19 13.93 4.19 12.5C4.19 8.03 7.85 4.37 12.32 4.37C12.33 4.37 12.35 4.37 12.35 4.37M9.35 8.16C9.17 8.16 8.87 8.23 8.62 8.5C8.37 8.77 7.67 10.74 7.67 12.06 8.63 13.34 8.77 13.52C8.91 13.7 10.6 16.41 13.31 17.47C15.58 18.36 16.03 18.18 16.53 18.14C17.03 18.1 18.14 17.47 18.37 16.84C18.6 16.21 18.6 15.66 18.53 15.55C18.46 15.43 18.27 15.37 17.9 15.19C17.53 15.01 15.7 14.11 15.37 13.98C15.03 13.86 14.79 13.8 14.54 14.17C14.3 14.54 13.6 15.37 13.39 15.61C13.18 15.86 12.97 15.89 12.6 15.7C12.23 15.5 10.74 15 8.97 13.43C7.59 12.2 6.66 10.68 6.39 10.22C6.12 9.76 6.37 9.51 6.55 9.33C6.72 9.15 6.93 8.87 7.11 8.66C7.3 8.44 7.37 8.3 7.5 8.03C7.62 7.76 7.56 7.53 7.47 7.35C7.38 7.16 6.65 5.38 6.35 4.65C6.05 3.93 5.75 4.03 5.54 4.02C5.33 4.02 5.09 4.02 4.85 4.02C4.6 4.02 4.22 4.11 3.9 4.46C3.59 4.81 2.7 5.64 2.7 7.33C2.7 9.02 3.93 10.65 4.1 10.88C4.27 11.11 6.5 14.58 10 16.1C13.5 17.62 13.5 17.11 14.12 17.05C14.74 16.99 16.12 16.22 16.4 15.44C16.68 14.66 16.68 14 16.6 13.86C16.5 13.72 16.3 13.66 15.93 13.48" /></svg>
-    </a>
+    <a href="#" id="wa-floating-btn" class="whatsapp-float hidden" target="_blank">WP</a>
 
     <div id="user-menu" class="user-menu-container hidden">
         <div class="profile-trigger" onclick="toggleDropdown()"><img id="top-profile-pic" src=""></div>
         <div class="dropdown-menu" id="profile-dropdown">
             <button onclick="tab('tools')">📂 Tools List</button>
             <button onclick="tab('profile')">👤 My Profile</button>
-            <button id="admin-entry-btn" class="hidden" onclick="show('screen-admin')">⚙️ Admin Dashboard</button>
+            <button id="admin-entry-btn" class="hidden" onclick="showAdminPanel()">⚙️ Admin Panel</button>
             <button onclick="logout()" style="color:var(--danger)">🚪 Logout</button>
         </div>
     </div>
 
     <div id="screen-login" class="container">
-        <h1 style="font-family:'Orbitron'; color:var(--primary);">GAMING HUB</h1>
+        <h1 style="font-family:'Orbitron'; color:var(--primary); margin-bottom:20px;">GAMING HUB</h1>
         <div class="glass-card">
-            <button class="btn" style="background:#fff; color:#000;" onclick="loginSocial()">Login with Google</button>
+            <div class="social-btn" onclick="login('google')">Google Login</div>
+            <div class="social-btn" onclick="login('github')" style="background:#24292e; color:#fff;">GitHub Login</div>
+            <hr style="margin:20px 0; opacity:0.2;">
+            <input type="email" id="email-input" placeholder="Email Address">
+            <input type="password" id="pass-input" placeholder="Password">
+            <button class="btn" onclick="emailAuth('login')">Login</button>
+            <p style="margin-top:10px; font-size:12px; cursor:pointer;" onclick="emailAuth('signup')">Don't have an account? Sign Up</p>
         </div>
     </div>
 
     <div id="screen-verify" class="container hidden">
-        <h2>Verification Required</h2>
+        <h2>Verify to Unlock</h2>
         <div class="glass-card">
             <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep()">Follow TikTok</a>
             <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep()">Subscribe YouTube</a>
             <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep()">Join WhatsApp</a>
-            <button id="unlock-btn" class="btn hidden" style="background:var(--success); color:#fff;" onclick="startTimer()">Unlock Tools</button>
-            <div id="timer-box" class="hidden" style="color:gold; margin-top:10px;">Checking: <span id="sec">15</span>s</div>
+            <button id="unlock-btn" class="btn hidden" style="background:var(--success);" onclick="startTimer()">Check Tasks</button>
+            <div id="timer-box" class="hidden" style="color:gold; margin-top:10px;">Verifying: <span id="sec">15</span>s</div>
         </div>
     </div>
 
@@ -83,41 +85,43 @@
             <div class="glass-card">
                 <img id="profile-pic" src="" style="width:80px; border-radius:50%; border:2px solid var(--primary);"><br><br>
                 <h3 id="profile-name-view"></h3>
-                <input type="text" id="edit-name" placeholder="Change Name">
-                <button class="btn" onclick="updateProfile()">Update Name</button>
+                <input type="text" id="edit-name" placeholder="New Name" style="margin-top:10px;">
+                <button class="btn" onclick="updateProfile()">Save Name</button>
             </div>
         </div>
     </div>
 
     <div id="screen-admin" class="container hidden">
-        <div class="glass-card" style="text-align:left; max-height:85vh; overflow-y:auto;">
-            <h3 style="color:var(--primary); text-align:center;">ADMIN DASHBOARD</h3>
-            <hr style="margin:15px 0; opacity:0.1;">
+        <div class="glass-card" style="text-align:left; max-height:90vh; overflow-y:auto;">
+            <h3 style="color:var(--primary); text-align:center;">ADMIN SETTINGS</h3>
             
-            <p style="font-weight:bold; color:var(--primary);">Tool Info</p>
-            <input type="text" id="t_name" placeholder="Tool Name">
-            <input type="text" id="t_url" placeholder="Download URL">
-            <input type="text" id="t_video" placeholder="Video Tutorial URL">
-            <input type="text" id="t_apple" placeholder="Apple/Game URL">
-            <input type="text" id="t_pic" placeholder="Icon Link">
-            
-            <p style="font-weight:bold; color:var(--primary); margin-top:10px;">Security Check (Eye Button Demo)</p>
-            <div class="input-group">
-                <input type="password" id="admin-pass-demo" placeholder="Example Password Field">
-                <span class="eye-icon" onclick="togglePass('admin-pass-demo')">👁️</span>
-            </div>
+            <p style="font-weight:bold; margin-top:15px; color:var(--primary);">Total Users: <span id="user-count">0</span></p>
+            <div id="admin-user-list" style="max-height:150px; overflow-y:auto; margin-bottom:20px; border:1px solid rgba(255,255,255,0.1); padding:5px;"></div>
 
-            <button class="btn" onclick="addTool()">Add New Tool</button>
-            <button class="btn" style="background:#444; color:#fff;" onclick="show('screen-content')">Back</button>
+            <p style="font-weight:bold; color:var(--primary);">Add New Tool</p>
+            <input type="text" id="t_name" placeholder="Tool Name">
+            <input type="text" id="t_url" placeholder="Download Link">
+            <input type="text" id="t_tutorial" placeholder="Tutorial Link (YouTube)">
+            <input type="text" id="t_pic" placeholder="Icon Image URL">
+            <button class="btn" onclick="addTool()">Add Tool</button>
+            
+            <hr style="margin:20px 0; opacity:0.1;">
+            
+            <p style="font-weight:bold; color:var(--primary);">Social Links</p>
+            <input type="text" id="conf_tk" placeholder="TikTok Link">
+            <input type="text" id="conf_yt" placeholder="YouTube Link">
+            <input type="text" id="conf_wa_num" placeholder="WhatsApp Number (e.g. 923...)">
+            <button class="btn" style="background:var(--secondary); color:#fff;" onclick="updateConfig()">Update Links</button>
+            
+            <button class="btn" style="background:#444; color:#fff;" onclick="show('screen-content')">Back to Dashboard</button>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, GithubAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Your Config
         const firebaseConfig = {
           apiKey: "AIzaSyA8eAIxj8kLzf1DuESe48rNF3_hR7_oorc",
           authDomain: "games-451a2.firebaseapp.com",
@@ -139,22 +143,36 @@
             if(user) {
                 const userRef = doc(db, "users", user.uid);
                 let snap = await getDoc(userRef);
+                
                 if(!snap.exists()) {
-                    await setDoc(userRef, { name: user.displayName, email: user.email, photo: user.photoURL, isVerified: false });
+                    await setDoc(userRef, { name: user.displayName || "User", email: user.email, photo: user.photoURL || "", isVerified: false, status: 'active' });
                 }
+
                 const ud = (await getDoc(userRef)).data();
+
+                // Check if Blocked
+                if(ud.status === 'blocked') {
+                    alert("Aapka account block kar diya gaya hai!");
+                    signOut(auth);
+                    return;
+                }
                 
                 document.getElementById('top-profile-pic').src = ud.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 document.getElementById('profile-pic').src = ud.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 document.getElementById('profile-name-view').innerText = ud.name;
                 document.getElementById('user-menu').classList.remove('hidden');
 
-                if(user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                if(user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     document.getElementById('admin-entry-btn').classList.remove('hidden');
                 }
 
-                if(ud.isVerified) { show('screen-content'); loadTools(); }
-                else { show('screen-verify'); loadVerifyLinks(); }
+                if(ud.isVerified || user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) { 
+                    show('screen-content'); 
+                    loadTools(); 
+                } else { 
+                    show('screen-verify'); 
+                    loadVerifyLinks(); 
+                }
                 loadGlobalConfig();
             } else {
                 show('screen-login');
@@ -162,22 +180,27 @@
             }
         });
 
-        // Core Functions
-        window.loginSocial = () => signInWithPopup(auth, new GoogleAuthProvider());
-        window.logout = () => signOut(auth).then(() => location.reload());
+        // Auth
+        window.login = (p) => signInWithPopup(auth, p === 'google' ? new GoogleAuthProvider() : new GithubAuthProvider());
+        window.emailAuth = (type) => {
+            const e = document.getElementById('email-input').value, p = document.getElementById('pass-input').value;
+            if(type === 'signup') createUserWithEmailAndPassword(auth, e, p);
+            else signInWithEmailAndPassword(auth, e, p);
+        };
+        window.logout = () => signOut(auth);
+
+        // Navigation
         window.show = (id) => { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
-        window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
-        window.togglePass = (id) => { const el = document.getElementById(id); el.type = el.type === 'password' ? 'text' : 'password'; };
-        
         window.tab = (t) => {
             show('screen-content');
             document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools');
             document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile');
             document.getElementById('profile-dropdown').classList.remove('active');
         };
+        window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
 
+        // Verification
         window.markStep = () => { stepsCount++; if(stepsCount >= 3) document.getElementById('unlock-btn').classList.remove('hidden'); };
-        
         window.startTimer = () => {
             document.getElementById('timer-box').classList.remove('hidden');
             let t = 15;
@@ -191,58 +214,101 @@
             }, 1000);
         };
 
-        window.updateProfile = async () => {
-            const name = document.getElementById('edit-name').value;
-            if(name) { await updateDoc(doc(db, "users", auth.currentUser.uid), { name }); alert("Success!"); location.reload(); }
+        // Admin Functions
+        window.showAdminPanel = () => {
+            show('screen-admin');
+            loadAdminUserList();
         };
 
-        // Admin: Add Tool
+        async function loadAdminUserList() {
+            onSnapshot(collection(db, "users"), (snap) => {
+                document.getElementById('user-count').innerText = snap.size;
+                const list = document.getElementById('admin-user-list');
+                list.innerHTML = snap.docs.map(d => {
+                    const u = d.data();
+                    return `
+                    <div class="user-item">
+                        <span>${u.email}</span>
+                        <button onclick="toggleBlock('${d.id}', '${u.status}')" style="background:${u.status === 'blocked'?'green':'red'}; color:white; border:none; padding:3px 8px; border-radius:5px;">
+                            ${u.status === 'blocked' ? 'Unblock' : 'Block'}
+                        </button>
+                    </div>`;
+                }).join('');
+            });
+        }
+
+        window.toggleBlock = async (uid, currentStatus) => {
+            await updateDoc(doc(db, "users", uid), { status: currentStatus === 'blocked' ? 'active' : 'blocked' });
+        };
+
         window.addTool = async () => {
             const name = document.getElementById('t_name').value;
             const url = document.getElementById('t_url').value;
-            const video = document.getElementById('t_video').value;
-            const apple = document.getElementById('t_apple').value;
+            const tut = document.getElementById('t_tutorial').value;
             const pic = document.getElementById('t_pic').value;
-            if(name && url && pic) {
-                await addDoc(collection(db, "tools"), { name, url, video: video||"", apple: apple||"", pic, time: Date.now() });
-                alert("Tool Added!"); location.reload();
+            if(name && url) {
+                await addDoc(collection(db, "tools"), { name, url, tutorial: tut, pic, time: Date.now() });
+                alert("Tool Added!");
             }
         };
 
-        // Load Data
+        window.deleteTool = async (id) => {
+            if(confirm("Delete this tool?")) await deleteDoc(doc(db, "tools", id));
+        };
+
+        // Dashboard Tools
         window.loadTools = () => {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (s) => {
-                allTools = s.docs.map(d => d.data());
+                allTools = s.docs.map(d => ({id: d.id, ...d.data()}));
                 renderTools(allTools);
             });
         };
 
         function renderTools(ts) {
-            const list = document.getElementById('tools-list');
-            list.innerHTML = "";
-            ts.forEach(t => {
-                list.innerHTML += `
+            const isAdmin = auth.currentUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+            document.getElementById('tools-list').innerHTML = ts.map(t => `
                 <div class="tool-card">
-                    <img src="${t.pic}" class="tool-img">
+                    <img src="${t.pic || 'https://via.placeholder.com/65'}" class="tool-img">
                     <div class="tool-info">
-                        <b style="color:var(--primary)">${t.name}</b>
-                        <div style="display:flex; gap:5px; margin-top:8px;">
+                        <b style="color:var(--primary)">${t.name}</b><br>
+                        <div style="margin-top:5px;">
                             <a href="${t.url}" target="_blank" class="btn-small" style="background:var(--success); color:#000;">Download</a>
-                            ${t.video ? `<a href="${t.video}" target="_blank" class="btn-small" style="background:var(--danger);">Video</a>` : ''}
-                            ${t.apple ? `<a href="${t.apple}" target="_blank" class="btn-small" style="background:var(--secondary);">Apple</a>` : ''}
+                            ${t.tutorial ? `<a href="${t.tutorial}" target="_blank" class="btn-small" style="background:var(--secondary);">Tutorial</a>` : ''}
+                            ${isAdmin ? `<button onclick="deleteTool('${t.id}')" class="btn-small" style="background:var(--danger);">Delete</button>` : ''}
                         </div>
                     </div>
-                </div>`;
-            });
+                </div>`).join('');
         }
+
+        window.filterTools = () => {
+            const term = document.getElementById('tool-search').value.toLowerCase();
+            renderTools(allTools.filter(t => t.name.toLowerCase().includes(term)));
+        };
+
+        window.updateProfile = async () => {
+            const n = document.getElementById('edit-name').value;
+            if(n) {
+                await updateDoc(doc(db, "users", auth.currentUser.uid), { name: n });
+                alert("Name Updated!");
+            }
+        };
 
         async function loadGlobalConfig() {
             const snap = await getDoc(doc(db, "config", "main"));
             if(snap.exists()) {
-                document.getElementById('wa-floating-btn').href = `https://wa.me/${snap.data().wa_num}`;
+                const d = snap.data();
+                document.getElementById('wa-floating-btn').href = `https://wa.me/${d.wa_num}`;
                 document.getElementById('wa-floating-btn').classList.remove('hidden');
             }
         }
+
+        window.updateConfig = async () => {
+            const tk = document.getElementById('conf_tk').value;
+            const yt = document.getElementById('conf_yt').value;
+            const wa = document.getElementById('conf_wa_num').value;
+            await setDoc(doc(db, "config", "main"), { tk, yt, wa_num: wa }, { merge: true });
+            alert("Links Updated!");
+        };
 
         async function loadVerifyLinks() {
             const snap = await getDoc(doc(db, "config", "main"));
@@ -250,15 +316,9 @@
                 const d = snap.data();
                 document.getElementById('s1_link').href = d.tk || "#";
                 document.getElementById('s2_link').href = d.yt || "#";
-                document.getElementById('s3_link').href = d.wa || "#";
+                document.getElementById('s3_link').href = `https://wa.me/${d.wa_num}` || "#";
             }
         }
-
-        window.filterTools = () => {
-            const q = document.getElementById('tool-search').value.toLowerCase();
-            renderTools(allTools.filter(t => t.name.toLowerCase().includes(q)));
-        };
     </script>
 </body>
 </html>
-
