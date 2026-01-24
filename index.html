@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMING HUB | SECURE ADMIN</title>
+    <title>GAMING HUB | ULTIMATE ADMIN</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00f2ff; --secondary: #7000ff; --bg: #050b18; --glass: rgba(15, 23, 42, 0.9); --danger: #ff4757; --success: #2ed573; }
@@ -32,8 +32,6 @@
         
         .hidden { display: none !important; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* User List Style */
         .user-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; margin-bottom: 5px; font-size: 12px; }
     </style>
 </head>
@@ -69,7 +67,7 @@
         <div class="glass-card">
             <a href="#" id="s1_link" class="btn" target="_blank" onclick="markStep()">Follow TikTok</a>
             <a href="#" id="s2_link" class="btn" target="_blank" onclick="markStep()">Subscribe YouTube</a>
-            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep()">Join WhatsApp</a>
+            <a href="#" id="s3_link" class="btn" target="_blank" onclick="markStep()">Join WhatsApp Channel</a>
             <button id="unlock-btn" class="btn hidden" style="background:var(--success);" onclick="startTimer()">Check Tasks</button>
             <div id="timer-box" class="hidden" style="color:gold; margin-top:10px;">Verifying: <span id="sec">15</span>s</div>
         </div>
@@ -95,25 +93,32 @@
         <div class="glass-card" style="text-align:left; max-height:90vh; overflow-y:auto;">
             <h3 style="color:var(--primary); text-align:center;">ADMIN SETTINGS</h3>
             
-            <p style="font-weight:bold; margin-top:15px; color:var(--primary);">Total Users: <span id="user-count">0</span></p>
-            <div id="admin-user-list" style="max-height:150px; overflow-y:auto; margin-bottom:20px; border:1px solid rgba(255,255,255,0.1); padding:5px;"></div>
+            <p style="font-weight:bold; margin-top:15px; color:var(--primary);">Users: <span id="user-count">0</span></p>
+            <div id="admin-user-list" style="max-height:100px; overflow-y:auto; margin-bottom:10px; border:1px solid rgba(255,255,255,0.1);"></div>
 
-            <p style="font-weight:bold; color:var(--primary);">Add New Tool</p>
+            <p style="font-weight:bold; color:var(--primary);">Add Tool</p>
             <input type="text" id="t_name" placeholder="Tool Name">
             <input type="text" id="t_url" placeholder="Download Link">
-            <input type="text" id="t_tutorial" placeholder="Tutorial Link (YouTube)">
-            <input type="text" id="t_pic" placeholder="Icon Image URL">
+            <input type="text" id="t_tutorial" placeholder="Tutorial Link">
+            <input type="text" id="t_pic" placeholder="Icon URL">
             <button class="btn" onclick="addTool()">Add Tool</button>
             
-            <hr style="margin:20px 0; opacity:0.1;">
+            <hr style="margin:15px 0; opacity:0.1;">
             
-            <p style="font-weight:bold; color:var(--primary);">Social Links</p>
+            <p style="font-weight:bold; color:var(--primary);">Social Tasks & Contact</p>
             <input type="text" id="conf_tk" placeholder="TikTok Link">
             <input type="text" id="conf_yt" placeholder="YouTube Link">
-            <input type="text" id="conf_wa_num" placeholder="WhatsApp Number (e.g. 923...)">
+            <input type="text" id="conf_wa_channel" placeholder="WA Channel Link">
+            <input type="text" id="conf_wa_num" placeholder="WA Number (923...)">
             <button class="btn" style="background:var(--secondary); color:#fff;" onclick="updateConfig()">Update Links</button>
             
-            <button class="btn" style="background:#444; color:#fff;" onclick="show('screen-content')">Back to Dashboard</button>
+            <hr style="margin:15px 0; opacity:0.1;">
+            
+            <p style="font-weight:bold; color:var(--danger);">Owner Settings</p>
+            <input type="email" id="new_admin_email" placeholder="New Owner Email">
+            <button class="btn" style="background:var(--danger); color:#fff;" onclick="updateAdminEmail()">Update Owner Email</button>
+
+            <button class="btn" style="background:#444; color:#fff;" onclick="show('screen-content')">Back</button>
         </div>
     </div>
 
@@ -135,52 +140,47 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const ADMIN_EMAIL = "Saabj5614@gmail.com";
+        let currentAdmin = "Saabj5614@gmail.com"; 
         let stepsCount = 0;
         let allTools = [];
 
         onAuthStateChanged(auth, async (user) => {
             if(user) {
+                // Get Admin Email from Firestore
+                const configSnap = await getDoc(doc(db, "config", "main"));
+                if(configSnap.exists() && configSnap.data().adminEmail) {
+                    currentAdmin = configSnap.data().adminEmail;
+                }
+
                 const userRef = doc(db, "users", user.uid);
                 let snap = await getDoc(userRef);
-                
                 if(!snap.exists()) {
                     await setDoc(userRef, { name: user.displayName || "User", email: user.email, photo: user.photoURL || "", isVerified: false, status: 'active' });
                 }
-
                 const ud = (await getDoc(userRef)).data();
-
-                // Check if Blocked
-                if(ud.status === 'blocked') {
-                    alert("Aapka account block kar diya gaya hai!");
-                    signOut(auth);
-                    return;
-                }
+                if(ud.status === 'blocked') { alert("Aap block hain!"); signOut(auth); return; }
                 
                 document.getElementById('top-profile-pic').src = ud.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 document.getElementById('profile-pic').src = ud.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 document.getElementById('profile-name-view').innerText = ud.name;
                 document.getElementById('user-menu').classList.remove('hidden');
 
-                if(user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                if(user.email?.toLowerCase() === currentAdmin.toLowerCase()) {
                     document.getElementById('admin-entry-btn').classList.remove('hidden');
                 }
 
-                if(ud.isVerified || user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) { 
-                    show('screen-content'); 
-                    loadTools(); 
+                if(ud.isVerified || user.email?.toLowerCase() === currentAdmin.toLowerCase()) { 
+                    show('screen-content'); loadTools(); 
                 } else { 
-                    show('screen-verify'); 
-                    loadVerifyLinks(); 
+                    show('screen-verify'); loadVerifyLinks(); 
                 }
                 loadGlobalConfig();
-            } else {
-                show('screen-login');
-                document.getElementById('user-menu').classList.add('hidden');
+            } else { 
+                show('screen-login'); document.getElementById('user-menu').classList.add('hidden'); 
             }
         });
 
-        // Auth
+        // Functions
         window.login = (p) => signInWithPopup(auth, p === 'google' ? new GoogleAuthProvider() : new GithubAuthProvider());
         window.emailAuth = (type) => {
             const e = document.getElementById('email-input').value, p = document.getElementById('pass-input').value;
@@ -188,84 +188,46 @@
             else signInWithEmailAndPassword(auth, e, p);
         };
         window.logout = () => signOut(auth);
-
-        // Navigation
         window.show = (id) => { document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
-        window.tab = (t) => {
-            show('screen-content');
-            document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools');
-            document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile');
-            document.getElementById('profile-dropdown').classList.remove('active');
-        };
+        window.tab = (t) => { show('screen-content'); document.getElementById('tab-tools-view').classList.toggle('hidden', t !== 'tools'); document.getElementById('tab-profile-view').classList.toggle('hidden', t !== 'profile'); document.getElementById('profile-dropdown').classList.remove('active'); };
         window.toggleDropdown = () => document.getElementById('profile-dropdown').classList.toggle('active');
 
-        // Verification
         window.markStep = () => { stepsCount++; if(stepsCount >= 3) document.getElementById('unlock-btn').classList.remove('hidden'); };
         window.startTimer = () => {
             document.getElementById('timer-box').classList.remove('hidden');
             let t = 15;
             let itv = setInterval(async () => {
                 t--; document.getElementById('sec').innerText = t;
-                if(t <= 0) {
-                    clearInterval(itv);
-                    await updateDoc(doc(db, "users", auth.currentUser.uid), { isVerified: true });
-                    location.reload();
-                }
+                if(t <= 0) { clearInterval(itv); await updateDoc(doc(db, "users", auth.currentUser.uid), { isVerified: true }); location.reload(); }
             }, 1000);
         };
 
-        // Admin Functions
-        window.showAdminPanel = () => {
-            show('screen-admin');
-            loadAdminUserList();
-        };
-
-        async function loadAdminUserList() {
+        window.showAdminPanel = () => { show('screen-admin'); loadAdminUserList(); };
+        function loadAdminUserList() {
             onSnapshot(collection(db, "users"), (snap) => {
                 document.getElementById('user-count').innerText = snap.size;
-                const list = document.getElementById('admin-user-list');
-                list.innerHTML = snap.docs.map(d => {
+                document.getElementById('admin-user-list').innerHTML = snap.docs.map(d => {
                     const u = d.data();
-                    return `
-                    <div class="user-item">
-                        <span>${u.email}</span>
-                        <button onclick="toggleBlock('${d.id}', '${u.status}')" style="background:${u.status === 'blocked'?'green':'red'}; color:white; border:none; padding:3px 8px; border-radius:5px;">
-                            ${u.status === 'blocked' ? 'Unblock' : 'Block'}
-                        </button>
-                    </div>`;
+                    return `<div class="user-item"><span>${u.email}</span><button onclick="toggleBlock('${d.id}', '${u.status}')" style="background:${u.status === 'blocked'?'green':'red'}; color:white; border:none; padding:3px 8px; border-radius:5px;">${u.status === 'blocked'?'Unblock':'Block'}</button></div>`;
                 }).join('');
             });
         }
-
-        window.toggleBlock = async (uid, currentStatus) => {
-            await updateDoc(doc(db, "users", uid), { status: currentStatus === 'blocked' ? 'active' : 'blocked' });
-        };
+        window.toggleBlock = async (uid, s) => await updateDoc(doc(db, "users", uid), { status: s === 'blocked' ? 'active' : 'blocked' });
 
         window.addTool = async () => {
-            const name = document.getElementById('t_name').value;
-            const url = document.getElementById('t_url').value;
-            const tut = document.getElementById('t_tutorial').value;
-            const pic = document.getElementById('t_pic').value;
-            if(name && url) {
-                await addDoc(collection(db, "tools"), { name, url, tutorial: tut, pic, time: Date.now() });
-                alert("Tool Added!");
-            }
+            const n = document.getElementById('t_name').value, u = document.getElementById('t_url').value, t = document.getElementById('t_tutorial').value, p = document.getElementById('t_pic').value;
+            if(n && u) { await addDoc(collection(db, "tools"), { name: n, url: u, tutorial: t, pic: p, time: Date.now() }); alert("Tool Added!"); }
         };
+        window.deleteTool = async (id) => { if(confirm("Delete?")) await deleteDoc(doc(db, "tools", id)); };
 
-        window.deleteTool = async (id) => {
-            if(confirm("Delete this tool?")) await deleteDoc(doc(db, "tools", id));
-        };
-
-        // Dashboard Tools
         window.loadTools = () => {
             onSnapshot(query(collection(db, "tools"), orderBy("time", "desc")), (s) => {
                 allTools = s.docs.map(d => ({id: d.id, ...d.data()}));
                 renderTools(allTools);
             });
         };
-
         function renderTools(ts) {
-            const isAdmin = auth.currentUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+            const isAdmin = auth.currentUser.email.toLowerCase() === currentAdmin.toLowerCase();
             document.getElementById('tools-list').innerHTML = ts.map(t => `
                 <div class="tool-card">
                     <img src="${t.pic || 'https://via.placeholder.com/65'}" class="tool-img">
@@ -287,27 +249,33 @@
 
         window.updateProfile = async () => {
             const n = document.getElementById('edit-name').value;
-            if(n) {
-                await updateDoc(doc(db, "users", auth.currentUser.uid), { name: n });
-                alert("Name Updated!");
-            }
+            if(n) { await updateDoc(doc(db, "users", auth.currentUser.uid), { name: n }); alert("Name Updated!"); }
         };
 
         async function loadGlobalConfig() {
             const snap = await getDoc(doc(db, "config", "main"));
             if(snap.exists()) {
                 const d = snap.data();
-                document.getElementById('wa-floating-btn').href = `https://wa.me/${d.wa_num}`;
-                document.getElementById('wa-floating-btn').classList.remove('hidden');
+                if(d.wa_num) {
+                    document.getElementById('wa-floating-btn').href = `https://wa.me/${d.wa_num}`;
+                    document.getElementById('wa-floating-btn').classList.remove('hidden');
+                }
             }
         }
 
         window.updateConfig = async () => {
-            const tk = document.getElementById('conf_tk').value;
-            const yt = document.getElementById('conf_yt').value;
-            const wa = document.getElementById('conf_wa_num').value;
-            await setDoc(doc(db, "config", "main"), { tk, yt, wa_num: wa }, { merge: true });
+            const tk = document.getElementById('conf_tk').value, yt = document.getElementById('conf_yt').value, wac = document.getElementById('conf_wa_channel').value, wan = document.getElementById('conf_wa_num').value;
+            await setDoc(doc(db, "config", "main"), { tk, yt, wa_channel: wac, wa_num: wan }, { merge: true });
             alert("Links Updated!");
+        };
+
+        window.updateAdminEmail = async () => {
+            const newEmail = document.getElementById('new_admin_email').value;
+            if(newEmail && confirm("Kya aap waqayi Owner badalna chahte hain? Phir aap admin nahi rahenge!")) {
+                await setDoc(doc(db, "config", "main"), { adminEmail: newEmail }, { merge: true });
+                alert("Owner Updated! Refreshing...");
+                location.reload();
+            }
         };
 
         async function loadVerifyLinks() {
@@ -316,7 +284,7 @@
                 const d = snap.data();
                 document.getElementById('s1_link').href = d.tk || "#";
                 document.getElementById('s2_link').href = d.yt || "#";
-                document.getElementById('s3_link').href = `https://wa.me/${d.wa_num}` || "#";
+                document.getElementById('s3_link').href = d.wa_channel || "#";
             }
         }
     </script>
